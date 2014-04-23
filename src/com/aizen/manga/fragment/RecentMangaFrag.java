@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import me.maxwin.view.XListView;
 import me.maxwin.view.XListView.IXListViewListener;
 
+import com.aizen.manga.DetailActivity;
 import com.aizen.manga.R;
 import com.aizen.manga.adapter.MangaListAdapter;
 import com.aizen.manga.module.Manga;
@@ -16,6 +17,7 @@ import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismis
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -55,8 +57,13 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				Intent it = new Intent(getActivity(), DetailActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putString(MangaInfoFrag.MANGA_LINK_STRING, mangas.get(position-1).getLink());
+				it.putExtras(bundle);       // it.putExtra(¡°test¡±, "shuju¡±);
+				startActivity(it); 
 				Toast.makeText(getActivity(),
-						"Deleted Successfully!" + position, Toast.LENGTH_SHORT)
+						mangas.get(position-1).getLink(), Toast.LENGTH_SHORT)
 						.show();
 			}
 		});

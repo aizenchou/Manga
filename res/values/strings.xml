@@ -14,9 +14,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_search_result">SearchResultActivity</string>
     <string name="manga_cover_description">漫画封面</string>
+    <string name="domain">http://www.manhuadao.com</string>
     <string name="hot_manga_list">http://www.manhuadao.com/list/view</string>
     <string name="recent_manga_list">http://www.manhuadao.com/list/update</string>
     <string name="host_url">http://www.manhuadao.com</string>
+    <string name="notice">“卷”为漫画单行本，“话”为杂志上的连载，“卷”包含了以往杂志上所有发行的“话”，故以下“卷”与“话”之间并没有缺少章节！</string>
     <string name="hot_tab_title">热门漫画</string>
     <string name="rec_tab_title">最近更新</string>
     <string name="fav_tab_title">我喜欢的</string>

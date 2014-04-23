@@ -7,12 +7,14 @@ import java.util.concurrent.Executors;
 import me.maxwin.view.XListView;
 import me.maxwin.view.XListView.IXListViewListener;
 
+import com.aizen.manga.DetailActivity;
 import com.aizen.manga.R;
 import com.aizen.manga.adapter.MangaListAdapter;
 import com.aizen.manga.module.Manga;
 import com.aizen.manga.util.NetAnalyse;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -57,8 +59,14 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				//position位置从1开始是因为位置0被headview占用了
+				Intent it = new Intent(getActivity(), DetailActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putString(MangaInfoFrag.MANGA_LINK_STRING, mangas.get(position-1).getLink());
+				it.putExtras(bundle);       // it.putExtra(“test”, "shuju”);
+				startActivity(it); 
 				Toast.makeText(getActivity(),
-						"Deleted Successfully!" + position, Toast.LENGTH_SHORT)
+						mangas.get(position-1).getLink(), Toast.LENGTH_SHORT)
 						.show();
 			}
 		});

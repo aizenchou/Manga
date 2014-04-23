@@ -1,5 +1,7 @@
 package com.aizen.manga.module;
 
+import java.util.ArrayList;
+
 import android.graphics.Bitmap;
 
 public class Manga {
@@ -13,12 +15,14 @@ public class Manga {
 	private String tag;
 	private String otherName;
 	private boolean status; //true表示正在连载，false表示已经完结
+	private String statusIntro;
 	private String description;
 	private String mark;
 	private String link;
 	private String coverURL;
 	private Bitmap cover;
 	private String updateto;
+	private ArrayList<Chapter> chapters;
 
 	public Manga(String id, String name, String author, String publishDate,
 			String updateDate, String lcoation, String tag, String otherName,
@@ -196,6 +200,22 @@ public class Manga {
 
 	public void setUpdateto(String updateto) {
 		this.updateto = updateto;
+	}
+
+	public String getStatusIntro() {
+		return statusIntro;
+	}
+
+	public void setStatusIntro(String statusIntro) {
+		this.statusIntro = statusIntro;
+	}
+
+	public ArrayList<Chapter> getChapters() {
+		return chapters;
+	}
+
+	public void setChapters(ArrayList<Chapter> chapters) {
+		this.chapters = chapters;
 	}
 
 }

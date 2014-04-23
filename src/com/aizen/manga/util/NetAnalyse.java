@@ -6,6 +6,7 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,10 +16,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.aizen.manga.module.Chapter;
 import com.aizen.manga.module.Manga;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.animation.DecelerateInterpolator;
 
 public class NetAnalyse {
 
@@ -52,7 +55,7 @@ public class NetAnalyse {
 	public static ArrayList<Manga> parseHtmlToList(String URL,
 			String imageCacheDir) throws Exception {
 		ArrayList<Manga> mangas = new ArrayList<>();
-		Document doc = Jsoup.connect(URL).get();
+		Document doc = Jsoup.connect(URL).timeout(3000).get();
 		Elements listElements = doc.select("ul#contList > li");
 		for (Element li : listElements) {
 			Manga manga = new Manga();
@@ -78,6 +81,58 @@ public class NetAnalyse {
 		}
 		return mangas;
 
+	}
+
+	public static Manga parseHtmlToInfo(String URL, String imageCacheDir)
+			throws Exception {
+		Manga mangaInfo = new Manga();
+		Document doc = Jsoup.connect(URL).get();
+		Element cont = doc.select("div.book-cont").first();
+		Document contDoc = Jsoup.parse(cont.html());
+		mangaInfo.setCoverURL(contDoc.select("p.hcover > img").first()
+				.attr("src"));
+		mangaInfo.setCover(ImageManager.getBitmapFromURL(
+				mangaInfo.getCoverURL(), imageCacheDir));
+		mangaInfo.setName(contDoc.select("div.book-title > h1").first().text());
+		mangaInfo.setAuthor(contDoc.select("a[href*=/search/]").first()
+				.parent().text());
+		mangaInfo.setPublishDate(contDoc.select("ul.detail-list a").first()
+				.text());
+		mangaInfo.setStatusIntro(contDoc.select("ul.detail-list > li.status")
+				.first().text());
+		mangaInfo
+				.setDescription(contDoc.select("div#intro-all").first().text());
+		return mangaInfo;
+	}
+
+	public static ArrayList<Chapter> parseHtmlToChapters(String URL)
+			throws IOException {
+		Document doc = Jsoup.connect(URL).get();
+		Elements eles = doc.select("div.chapter-list");
+		ArrayList<Chapter> chapters = new ArrayList<>();
+		for (Element ele : eles) {
+			Document subListDoc = Jsoup.parse(ele.html());
+			ArrayList<Chapter> subChapters = new ArrayList<>();
+			Elements uls = subListDoc.select("ul");
+			for (Element ul : uls) {
+				Elements links = Jsoup.parse(ul.html()).select("a.status0");
+				ArrayList<Chapter> ulsChapters = new ArrayList<>();
+				for (Element link : links) {
+					Chapter chapter = new Chapter(link.text().substring(
+							0,
+							link.text().length()
+									- Jsoup.parse(link.html()).select("i")
+											.text().length()),
+							link.attr("href"));
+					ulsChapters.add(chapter);
+				}
+				Collections.reverse(ulsChapters);
+				subChapters.addAll(ulsChapters);
+			}
+			Collections.reverse(subChapters);
+			chapters.addAll(subChapters);
+		}
+		return chapters;
 	}
 
 	public static String catchData(String URL) throws Exception {

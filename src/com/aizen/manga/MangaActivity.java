@@ -3,6 +3,7 @@ package com.aizen.manga;
 import com.aizen.manga.util.SystemUiHider;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,11 @@ public class MangaActivity extends Activity {
 	private static final boolean AUTO_HIDE = true;
 
 	/**
+	 * ´«ÈëURL 
+	 */
+	public static final String CHAPTER_LINK_STRING = "chapterlink";
+	
+	/**
 	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
 	 * user interaction before hiding the system UI.
 	 */
@@ -46,6 +52,7 @@ public class MangaActivity extends Activity {
 	 * The instance of the {@link SystemUiHider} for this activity.
 	 */
 	private SystemUiHider mSystemUiHider;
+	private ActionBar mActionBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
