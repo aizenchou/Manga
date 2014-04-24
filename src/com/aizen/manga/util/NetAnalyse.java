@@ -25,6 +25,8 @@ import android.view.animation.DecelerateInterpolator;
 
 public class NetAnalyse {
 
+	public static String cookieValue = "";
+	
 	public static String getMD5Str(String str) {
 		MessageDigest messageDigest = null;
 		try {
@@ -50,6 +52,10 @@ public class NetAnalyse {
 		}
 
 		return md5StrBuff.toString();
+	}
+
+	public static ArrayList<String> parseHtmlToPageURLs(String URL) {
+		return null;
 	}
 
 	public static ArrayList<Manga> parseHtmlToList(String URL,
@@ -85,6 +91,10 @@ public class NetAnalyse {
 
 	public static Manga parseHtmlToInfo(String URL, String imageCacheDir)
 			throws Exception {
+		//URL domain = new URL(URL); 
+		//HttpURLConnection connection = (HttpURLConnection)domain.openConnection();
+		//cookieValue = connection.getHeaderField("Set-Cookie");
+		//System.out.println(cookieValue);
 		Manga mangaInfo = new Manga();
 		Document doc = Jsoup.connect(URL).get();
 		Element cont = doc.select("div.book-cont").first();

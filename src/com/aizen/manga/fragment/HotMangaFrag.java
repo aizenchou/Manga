@@ -84,6 +84,7 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 			@Override
 			public void run() {
 				try {
+					//mangas.add(new Manga("", "naruto", "anben", "9.9", "none"));
 					refreshHotMangaList(page);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -108,6 +109,7 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
+					//mangas.add(new Manga("", "naruto", "anben", "9.9", "none"));
 					mangas.addAll(mangaDataList);
 					mangasAdapter.notifyDataSetChanged();
 					swingBottomInAnimationAdapter.notifyDataSetChanged();

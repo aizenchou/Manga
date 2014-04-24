@@ -72,10 +72,15 @@ public class MangaInfoFrag extends Fragment {
 				Toast.makeText(getActivity(), chapters.get(position).getLink(),
 						Toast.LENGTH_SHORT).show();
 				Intent it = new Intent(getActivity(), MangaActivity.class);
-				Bundle bundle=new Bundle();
-				bundle.putString(MangaActivity.CHAPTER_LINK_STRING, chapters.get(position).getLink());
-				it.putExtras(bundle);      
-				startActivity(it); 
+				Bundle bundle = new Bundle();
+				bundle.putStringArrayList(
+						MangaActivity.CHAPTER_LINK_KEY,
+						NetAnalyse.parseHtmlToPageURLs(R.string.domain
+								+ chapters.get(position).getLink()));
+			//	bundle.putString(MangaActivity.CHAPTER_LINK_KEY,
+			//			chapters.get(position).getLink());
+				it.putExtras(bundle);
+				startActivity(it);
 
 			}
 		});

@@ -11,16 +11,11 @@
          TextureView, etc.
     -->
 
-    <TextView
-        android:id="@+id/fullscreen_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="@string/dummy_content"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+    <android.support.v4.view.ViewPager 
+    android:id="@+id/imagepager"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    </android.support.v4.view.ViewPager>
 
     <!--
          This FrameLayout insets its children based on system windows using
