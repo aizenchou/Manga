@@ -18,10 +18,14 @@ package com.aizen.manga.fragment;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.aizen.manga.MangaActivity;
@@ -29,6 +33,7 @@ import com.aizen.manga.R;
 import com.aizen.manga.util.ImageFetcher;
 import com.aizen.manga.util.ImageWorker;
 import com.aizen.manga.util.Utils;
+import com.aizen.manga.view.RecyclingImageView;
 
 /**
  * This fragment will populate the children of the ViewPager from {@link ImageDetailActivity}.
@@ -36,8 +41,9 @@ import com.aizen.manga.util.Utils;
 public class ImageDetailFragment extends Fragment {
     private static final String IMAGE_DATA_EXTRA = "extra_image_data";
     private String mImageUrl;
-    private ImageView mImageView;
+    private RecyclingImageView mImageView;
     private ImageFetcher mImageFetcher;
+
 
     /**
      * Factory method to generate a new instance of the fragment given an image number.
@@ -68,6 +74,7 @@ public class ImageDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mImageUrl = getArguments() != null ? getArguments().getString(IMAGE_DATA_EXTRA) : null;
+
     }
 
     @Override
@@ -75,7 +82,8 @@ public class ImageDetailFragment extends Fragment {
             Bundle savedInstanceState) {
         // Inflate and locate the main ImageView
         final View v = inflater.inflate(R.layout.image_detail_fragment, container, false);
-        mImageView = (ImageView) v.findViewById(R.id.imageView);
+        mImageView = (RecyclingImageView) v.findViewById(R.id.imageView);
+        mImageView.setMaxZoom(4f);
         return v;
     }
 

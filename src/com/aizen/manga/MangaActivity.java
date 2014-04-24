@@ -13,15 +13,13 @@ import com.aizen.manga.util.ImageCache;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
 import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
+import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Toast;
 import android.app.Fragment;
@@ -36,7 +34,7 @@ import android.support.v4.view.ViewPager;
  * 
  * @see SystemUiHider
  */
-public class MangaActivity extends Activity {
+public class MangaActivity extends Activity implements OnClickListener {
 	private static final String IMAGE_CACHE_DIR = "images";
 	public static final String EXTRA_IMAGE = "extra_image";
 
@@ -79,13 +77,12 @@ public class MangaActivity extends Activity {
 
 	@TargetApi(VERSION_CODES.HONEYCOMB)
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		if (BuildConfig.DEBUG) {
 			Utils.enableStrictMode();
 		}
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_manga);
-		setupActionBar();
 
 		imageurls.add("http://i3.manhuadao.com/bcover/2012/12/261757398_h.jpg");
 		imageurls
@@ -93,13 +90,24 @@ public class MangaActivity extends Activity {
 		imageurls
 				.add("http://t6.mangafiles.com:88/Files/Images/3682/99100/imanhua_001.jpg");
 		// imageurls.addAll(savedInstanceState.getStringArrayList(CHAPTER_LINK_KEY));
+		
+		// Fetch screen height and width, to use as our max size when loading
+		// images as this
+		// activity runs full screen
 		final DisplayMetrics displayMetrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 		final int height = displayMetrics.heightPixels;
 		final int width = displayMetrics.widthPixels;
-		final View controlsView = findViewById(R.id.fullscreen_content_controls);
-		// final View contentView = findViewById(R.id.pager);
 
+		// For this sample we'll use half of the longest width to resize our
+		// images. As the
+		// image scaling ensures the image is larger than this, we should be
+		// left with a
+		// resolution that is appropriate for both portrait and landscape. For
+		// best image quality
+		// we shouldn't divide by 2, but this will use more memory and require a
+		// larger memory
+		// cache.
 		final int longest = (height > width ? height : width) / 2;
 
 		ImageCache.ImageCacheParams cacheParams = new ImageCache.ImageCacheParams(
@@ -148,75 +156,8 @@ public class MangaActivity extends Activity {
 
 			// Start low profile mode and hide ActionBar
 			mPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
-			// actionBar.hide();
+			actionBar.hide();
 		}
-
-		// Set the current item based on the extra passed in to this activity
-		final int extraCurrentItem = getIntent().getIntExtra(EXTRA_IMAGE, -1);
-		if (extraCurrentItem != -1) {
-			mPager.setCurrentItem(extraCurrentItem);
-		}
-		// Set up an instance of SystemUiHider to control the system UI for
-		// this activity.
-		mSystemUiHider = SystemUiHider.getInstance(this, mPager, HIDER_FLAGS);
-		mSystemUiHider.setup();
-		mSystemUiHider
-				.setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
-					// Cached values.
-					int mControlsHeight;
-					int mShortAnimTime;
-
-					@Override
-					@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-					public void onVisibilityChange(boolean visible) {
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-							// If the ViewPropertyAnimator API is available
-							// (Honeycomb MR2 and later), use it to animate the
-							// in-layout UI controls at the bottom of the
-							// screen.
-							if (mControlsHeight == 0) {
-								mControlsHeight = controlsView.getHeight();
-							}
-							if (mShortAnimTime == 0) {
-								mShortAnimTime = getResources().getInteger(
-										android.R.integer.config_shortAnimTime);
-							}
-							controlsView
-									.animate()
-									.translationY(visible ? 0 : mControlsHeight)
-									.setDuration(mShortAnimTime);
-						} else {
-							// If the ViewPropertyAnimator APIs aren't
-							// available, simply show or hide the in-layout UI
-							// controls.
-							controlsView.setVisibility(visible ? View.VISIBLE
-									: View.GONE);
-						}
-
-						if (visible && AUTO_HIDE) {
-							// Schedule a hide().
-							delayedHide(AUTO_HIDE_DELAY_MILLIS);
-						}
-					}
-				});
-
-		// Set up the user interaction to manually show or hide the system UI.
-		mPager.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (TOGGLE_ON_CLICK) {
-					mSystemUiHider.toggle();
-				} else {
-					mSystemUiHider.show();
-				}
-			}
-		});
-
-		// Upon interacting with UI controls, delay any scheduled hide()
-		// operations to prevent the jarring behavior of controls going away
-		// while interacting with the UI.
-		findViewById(R.id.dummy_button).setOnTouchListener(
-				mDelayHideTouchListener);
 	}
 
 	@Override
@@ -239,46 +180,8 @@ public class MangaActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main_menu, menu);
-		return true;
-	}
-
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-
-		// Trigger the initial hide() shortly after the activity has been
-		// created, to briefly hint to the user that UI controls
-		// are available.
-		delayedHide(100);
-	}
-
-	/**
-	 * Set up the {@link android.app.ActionBar}, if the API is available.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setupActionBar() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			// Show the Up button in the action bar.
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-			// getActionBar().hide();
-		}
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		switch (id) {
-		// This ID represents the Home or Up button. In the case of this
-		// activity, the Up button is shown. Use NavUtils to allow users
-		// to navigate up one level in the application structure. For
-		// more details, see the Navigation pattern on Android Design:
-		//
-		// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-		//
-		// TODO: If Settings has multiple levels, Up should navigate up
-		// that hierarchy.
+		switch (item.getItemId()) {
 		case android.R.id.home:
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
@@ -287,14 +190,14 @@ public class MangaActivity extends Activity {
 			Toast.makeText(this, R.string.clear_cache_complete_toast,
 					Toast.LENGTH_SHORT).show();
 			return true;
-		case R.id.dummy_button:
-			mImageFetcher.clearCache();
-			Toast.makeText(this, R.string.clear_cache_complete_toast,
-					Toast.LENGTH_SHORT).show();
-			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main_menu, menu);
+		return true;
 	}
 
 	/**
@@ -306,29 +209,6 @@ public class MangaActivity extends Activity {
 	}
 
 	/**
-	 * Touch listener to use for in-layout UI controls to delay hiding the
-	 * system UI. This is to prevent the jarring behavior of controls going away
-	 * while interacting with activity UI.
-	 */
-	View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-		@Override
-		public boolean onTouch(View view, MotionEvent motionEvent) {
-			if (AUTO_HIDE) {
-				delayedHide(AUTO_HIDE_DELAY_MILLIS);
-			}
-			return false;
-		}
-	};
-
-	Handler mHideHandler = new Handler();
-	Runnable mHideRunnable = new Runnable() {
-		@Override
-		public void run() {
-			mSystemUiHider.hide();
-		}
-	};
-
-	/**
 	 * The main adapter that backs the ViewPager. A subclass of
 	 * FragmentStatePagerAdapter as there could be a large number of items in
 	 * the ViewPager and we don't want to retain them all in memory at once but
@@ -336,12 +216,12 @@ public class MangaActivity extends Activity {
 	 */
 	private class ImagePagerAdapter extends FragmentStatePagerAdapter {
 		private final int mSize;
-		private final ArrayList<String> mPageUrls;
+		private final ArrayList<String> mUrls;
 
-		public ImagePagerAdapter(FragmentManager fm, ArrayList<String> pageUrls) {
+		public ImagePagerAdapter(FragmentManager fm, ArrayList<String> urls) {
 			super(fm);
-			mSize = pageUrls.size();
-			mPageUrls = pageUrls;
+			mSize = urls.size();
+			mUrls = urls;
 		}
 
 		@Override
@@ -351,16 +231,22 @@ public class MangaActivity extends Activity {
 
 		@Override
 		public Fragment getItem(int position) {
-			return ImageDetailFragment.newInstance(mPageUrls.get(position));
+			return ImageDetailFragment.newInstance(mUrls.get(position));
 		}
 	}
 
 	/**
-	 * Schedules a call to hide() in [delay] milliseconds, canceling any
-	 * previously scheduled calls.
+	 * Set on the ImageView in the ViewPager children fragments, to
+	 * enable/disable low profile mode when the ImageView is touched.
 	 */
-	private void delayedHide(int delayMillis) {
-		mHideHandler.removeCallbacks(mHideRunnable);
-		mHideHandler.postDelayed(mHideRunnable, delayMillis);
+	@TargetApi(VERSION_CODES.HONEYCOMB)
+	@Override
+	public void onClick(View v) {
+		final int vis = mPager.getSystemUiVisibility();
+		if ((vis & View.SYSTEM_UI_FLAG_LOW_PROFILE) != 0) {
+			mPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+		} else {
+			mPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+		}
 	}
 }
