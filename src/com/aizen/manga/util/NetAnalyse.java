@@ -16,6 +16,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.aizen.manga.R;
 import com.aizen.manga.module.Chapter;
 import com.aizen.manga.module.Manga;
 
@@ -59,7 +60,8 @@ public class NetAnalyse {
 			String resultString = catchData(URL);
 			String reg = "\'(/Files/Images/[\\d]{1,7}/[\\d]{1,7}/.*?)\'";
 			System.out.println(resultString);
-			return getMatchStrings(reg, resultString, 1);
+			return getMatchStrings(reg, resultString, 1,
+					"http://t6.mangafiles.com:88", "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,6 +98,7 @@ public class NetAnalyse {
 			 * manga.getUpdateto() + manga.getMark());
 			 */
 			mangas.add(manga);
+			//System.out.println(ContextUtil.getInstance().getResources().getString(R.string.domain));
 		}
 		return mangas;
 
@@ -175,13 +178,12 @@ public class NetAnalyse {
 	}
 
 	public static ArrayList<String> getMatchStrings(String regex,
-			String dataresult, int groupnum) {
+			String dataresult, int groupnum, String prefix, String postfix) {
 		ArrayList<String> matchStrings = new ArrayList<>();
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(dataresult);
 		while (matcher.find())
-			matchStrings.add("http://t6.mangafiles.com:88"
-					+ matcher.group(groupnum));
+			matchStrings.add(prefix + matcher.group(groupnum) + postfix);
 		for (String string : matchStrings) {
 			System.out.println(string);
 		}
