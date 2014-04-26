@@ -22,9 +22,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.widget.Toast;
-
 import android.util.Log;
+
 import com.aizen.manga.BuildConfig;
+import com.aizen.manga.MangaActivity;
 import com.aizen.manga.R;
 
 import java.io.BufferedInputStream;
@@ -272,7 +273,7 @@ public class ImageFetcher extends ImageResizer {
         try {
             final URL url = new URL(urlString);
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestProperty("Referer", "http://www.imanhua.com/comic/76/list_59262.html");
+            urlConnection.setRequestProperty("Referer", MangaActivity.chapter.equals("")?"http://www.imanhua.com/comic/76/list_59262.html":MangaActivity.chapter);
             urlConnection.setRequestProperty("User-Agent", "UserAgent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36");
             urlConnection.setRequestProperty("Proxy-Connection", "Keep-Alive");
             

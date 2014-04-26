@@ -26,7 +26,7 @@ import android.view.animation.DecelerateInterpolator;
 public class NetAnalyse {
 
 	public static String cookieValue = "";
-	
+
 	public static String getMD5Str(String str) {
 		MessageDigest messageDigest = null;
 		try {
@@ -55,7 +55,16 @@ public class NetAnalyse {
 	}
 
 	public static ArrayList<String> parseHtmlToPageURLs(String URL) {
-		return null;
+		try {
+			String resultString = catchData(URL);
+			String reg = "\'(/Files/Images/[\\d]{1,7}/[\\d]{1,7}/.*?)\'";
+			System.out.println(resultString);
+			return getMatchStrings(reg, resultString, 1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public static ArrayList<Manga> parseHtmlToList(String URL,
@@ -91,10 +100,11 @@ public class NetAnalyse {
 
 	public static Manga parseHtmlToInfo(String URL, String imageCacheDir)
 			throws Exception {
-		//URL domain = new URL(URL); 
-		//HttpURLConnection connection = (HttpURLConnection)domain.openConnection();
-		//cookieValue = connection.getHeaderField("Set-Cookie");
-		//System.out.println(cookieValue);
+		// URL domain = new URL(URL);
+		// HttpURLConnection connection =
+		// (HttpURLConnection)domain.openConnection();
+		// cookieValue = connection.getHeaderField("Set-Cookie");
+		// System.out.println(cookieValue);
 		Manga mangaInfo = new Manga();
 		Document doc = Jsoup.connect(URL).get();
 		Element cont = doc.select("div.book-cont").first();
@@ -156,16 +166,21 @@ public class NetAnalyse {
 		while ((line = bufReader.readLine()) != null) {
 			contentBuf.append(line);
 		}
+		bufReader.close();
+		input.close();
 		return contentBuf.toString();
 	}
 
-	public static Vector<String> getMatchStrings(String regex,
+	public static ArrayList<String> getMatchStrings(String regex,
 			String dataresult, int groupnum) {
-		Vector<String> matchStrings = new Vector<>();
+		ArrayList<String> matchStrings = new ArrayList<>();
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(dataresult);
 		while (matcher.find())
-			matchStrings.add(matcher.group(groupnum));
+			matchStrings.add("http://t6.mangafiles.com:88"+matcher.group(groupnum));
+		for (String string : matchStrings) {
+			System.out.println(string);
+		}
 		return matchStrings;
 	}
 

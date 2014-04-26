@@ -1,5 +1,6 @@
 package com.aizen.manga.fragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -71,17 +72,14 @@ public class MangaInfoFrag extends Fragment {
 				// TODO Auto-generated method stub
 				Toast.makeText(getActivity(), chapters.get(position).getLink(),
 						Toast.LENGTH_SHORT).show();
-				Intent it = new Intent(getActivity(), MangaActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putStringArrayList(
-						MangaActivity.CHAPTER_LINK_KEY,
-						NetAnalyse.parseHtmlToPageURLs(R.string.domain
-								+ chapters.get(position).getLink()));
-			//	bundle.putString(MangaActivity.CHAPTER_LINK_KEY,
-			//			chapters.get(position).getLink());
+				final String chapterUrl = getString(R.string.domain)
+						+ chapters.get(position).getLink();
+				System.out.println(chapterUrl);
+				final Intent it = new Intent(getActivity(), MangaActivity.class);
+				final Bundle bundle = new Bundle();
+				bundle.putString(MangaActivity.CHAPTER_KEY, chapterUrl);
 				it.putExtras(bundle);
 				startActivity(it);
-
 			}
 		});
 		int layoutID = R.layout.gridview_mangachapter;
@@ -132,4 +130,5 @@ public class MangaInfoFrag extends Fragment {
 			e.printStackTrace();
 		}
 	}
+
 }

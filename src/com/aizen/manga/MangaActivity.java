@@ -1,7 +1,10 @@
 package com.aizen.manga;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+import com.aizen.manga.util.NetAnalyse;
 import com.aizen.manga.util.SystemUiHider;
 import com.aizen.manga.fragment.ImageDetailFragment;
 import com.aizen.manga.util.ImageFetcher;
@@ -14,6 +17,7 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
 import android.view.Menu;
@@ -42,6 +46,9 @@ public class MangaActivity extends Activity implements OnClickListener {
 	private ImageFetcher mImageFetcher;
 	private ViewPager mPager;
 	private ArrayList<String> imageurls = new ArrayList<>();
+	public static String chapter = "";
+	private Handler handler = new Handler();
+	private ExecutorService executorService = Executors.newFixedThreadPool(10);
 	/**
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -52,6 +59,8 @@ public class MangaActivity extends Activity implements OnClickListener {
 	 * ´«ÈëURL
 	 */
 	public static final String CHAPTER_LINK_KEY = "chapterlink";
+	
+	public static final String CHAPTER_KEY = "chapter";
 
 	/**
 	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -89,8 +98,9 @@ public class MangaActivity extends Activity implements OnClickListener {
 				.add("http://cartoon.jide123.cc:8080/manhuatuku/1835/2014417171542670.jpg");
 		imageurls
 				.add("http://t6.mangafiles.com:88/Files/Images/3682/99100/imanhua_001.jpg");
-		// imageurls.addAll(savedInstanceState.getStringArrayList(CHAPTER_LINK_KEY));
-		
+	//	imageurls.addAll(getIntent().getExtras().getStringArrayList(CHAPTER_LINK_KEY));
+		chapter = getIntent().getExtras().getString(CHAPTER_KEY);
+		System.out.println(chapter);
 		// Fetch screen height and width, to use as our max size when loading
 		// images as this
 		// activity runs full screen
@@ -158,6 +168,24 @@ public class MangaActivity extends Activity implements OnClickListener {
 			mPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 			actionBar.hide();
 		}
+		executorService.submit(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				final ArrayList<String> linkdatas = NetAnalyse.parseHtmlToPageURLs(chapter);
+				System.out.println(chapter+1);
+				handler.post(new Runnable() {
+					
+					@Override
+					public void run() {
+						System.out.println(chapter+2);
+						// TODO Auto-generated method stub
+						imageurls.addAll(linkdatas);
+						mAdapter.notifyDataSetChanged();
+					}
+				});
+			}
+		});
 	}
 
 	@Override
@@ -215,18 +243,18 @@ public class MangaActivity extends Activity implements OnClickListener {
 	 * create/destroy them on the fly.
 	 */
 	private class ImagePagerAdapter extends FragmentStatePagerAdapter {
-		private final int mSize;
+		//private final int mSize;
 		private final ArrayList<String> mUrls;
 
 		public ImagePagerAdapter(FragmentManager fm, ArrayList<String> urls) {
 			super(fm);
-			mSize = urls.size();
+			//mSize = urls.size();
 			mUrls = urls;
 		}
 
 		@Override
 		public int getCount() {
-			return mSize;
+			return mUrls.size();
 		}
 
 		@Override
@@ -245,8 +273,10 @@ public class MangaActivity extends Activity implements OnClickListener {
 		final int vis = mPager.getSystemUiVisibility();
 		if ((vis & View.SYSTEM_UI_FLAG_LOW_PROFILE) != 0) {
 			mPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+			findViewById(R.id.fullscreen_content_controls).setVisibility(View.VISIBLE);
 		} else {
 			mPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+			findViewById(R.id.fullscreen_content_controls).setVisibility(View.INVISIBLE);
 		}
 	}
 }
