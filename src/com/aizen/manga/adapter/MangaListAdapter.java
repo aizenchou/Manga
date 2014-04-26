@@ -1,14 +1,17 @@
 package com.aizen.manga.adapter;
 
 import java.util.ArrayList;
+
 import com.aizen.manga.R;
 import com.aizen.manga.module.Manga;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class MangaListAdapter extends BaseAdapter {
@@ -20,7 +23,8 @@ public class MangaListAdapter extends BaseAdapter {
 
 	public final class ListItemView {
 		public ImageView mangaCover;
-		public TextView mangaName, mangaUpdateTo, mangaMark, mangaIsLike, mangaUpdateDate, mangaStatus;
+		public TextView mangaName, mangaUpdateTo, mangaUpdateDate, mangaStatus;
+		public RatingBar mangaMark;
 	}
 
 	
@@ -60,10 +64,10 @@ public class MangaListAdapter extends BaseAdapter {
 			listItemView.mangaCover = (ImageView)convertView.findViewById(R.id.mangaCover);
 			listItemView.mangaName = (TextView)convertView.findViewById(R.id.mangaName);
 			listItemView.mangaUpdateTo = (TextView)convertView.findViewById(R.id.mangaUpdateTo);
-			listItemView.mangaMark = (TextView)convertView.findViewById(R.id.mangaMark);
+			listItemView.mangaMark = (RatingBar)convertView.findViewById(R.id.mangaMark);
 			listItemView.mangaUpdateDate = (TextView)convertView.findViewById(R.id.mangaUpdateDate);
 			listItemView.mangaStatus = (TextView)convertView.findViewById(R.id.mangaStatus);
-			listItemView.mangaIsLike = (TextView)convertView.findViewById(R.id.mangaIsLike);
+		//	listItemView.mangaIsLike = (TextView)convertView.findViewById(R.id.mangaIsLike);
 			
 			convertView.setTag(listItemView);
 		} else {
@@ -72,10 +76,10 @@ public class MangaListAdapter extends BaseAdapter {
 		listItemView.mangaCover.setImageBitmap(mangaListItems.get(position).getCover());
 		listItemView.mangaName.setText(mangaListItems.get(position).getName());
 		listItemView.mangaUpdateTo.setText(mangaListItems.get(position).getUpdateto());
-		listItemView.mangaMark.setText(mangaListItems.get(position).getMark());
+		listItemView.mangaMark.setRating(Float.parseFloat(mangaListItems.get(position).getMark())/2);
 		listItemView.mangaUpdateDate.setText(mangaListItems.get(position).getUpdateDate());
 		listItemView.mangaStatus.setText(mangaListItems.get(position).isStatus()?"正在连载":"已完结");
-		listItemView.mangaIsLike.setText("喜欢");
+		//listItemView.mangaIsLike.setText("喜欢");
 		
 		return convertView;
 	}

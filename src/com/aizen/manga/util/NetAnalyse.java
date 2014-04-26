@@ -85,8 +85,11 @@ public class NetAnalyse {
 			manga.setUpdateto(lidoc.select("a.bcover > span.tt").text());
 			manga.setStatus(lidoc.select("a.bcover > span").last()
 					.attr("class").equals("sl") ? true : false);
-			manga.setUpdateDate(lidoc.select("span.updateon").text());
-			manga.setMark(lidoc.select("span.updateon > em").text());
+			String markString = lidoc.select("span.updateon > em").text();
+			String dateString = lidoc.select("span.updateon").text();
+			manga.setUpdateDate(dateString.substring(0, dateString.length()
+					- markString.length()));
+			manga.setMark(markString);
 			/*
 			 * System.out.println(manga.getLink() + manga.getId() +
 			 * manga.getName() + manga.getCoverURL() + manga.getUpdateDate() +
@@ -177,7 +180,8 @@ public class NetAnalyse {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(dataresult);
 		while (matcher.find())
-			matchStrings.add("http://t6.mangafiles.com:88"+matcher.group(groupnum));
+			matchStrings.add("http://t6.mangafiles.com:88"
+					+ matcher.group(groupnum));
 		for (String string : matchStrings) {
 			System.out.println(string);
 		}
