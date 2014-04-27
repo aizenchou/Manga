@@ -1,73 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView1"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@color/CardFragBackground" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/mangainfo_cover"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/cover" />
-
-        <TextView
-            android:id="@+id/mangainfo_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/mangainfo_cover"
-            android:layout_toRightOf="@+id/mangainfo_cover"
-            android:text="name" />
-
-        <TextView
-            android:id="@+id/mangainfo_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/mangainfo_name"
-            android:layout_below="@+id/mangainfo_name"
-            android:text="author" />
-
-        <TextView
-            android:id="@+id/mangainfo_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/mangainfo_name"
-            android:layout_below="@+id/mangainfo_author"
-            android:text="status"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
-            android:id="@+id/mangainfo_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/mangainfo_cover"
-            android:layout_below="@+id/mangainfo_cover"
-            android:text="desc"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <ImageButton
-            android:id="@+id/mangainfo_btn_play"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/mangainfo_desc"
-            android:layout_below="@+id/mangainfo_desc"
-            android:layout_marginTop="30dp"
-            android:src="@android:drawable/ic_menu_slideshow" />
-
-        <com.aizen.manga.view.NoScrollGridView
-            android:id="@+id/mangainfo_chaptergrid"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/mangainfo_btn_play"
-            android:layout_below="@+id/mangainfo_btn_play"
-            android:layout_marginTop="27dp"
-            android:numColumns="4" >
-        </com.aizen.manga.view.NoScrollGridView>
-    </RelativeLayout>
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/card_background" >
+
+            <ImageView
+                android:id="@+id/mangainfo_cover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:contentDescription="@string/manga_cover_description"
+                android:src="@drawable/cover" />
+
+            <TextView
+                android:id="@+id/mangainfo_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/mangainfo_cover"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="desc" />
+
+            <TextView
+                android:id="@+id/mangainfo_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_toRightOf="@+id/mangainfo_cover"
+                android:text="name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/TextBlack" />
+
+            <TextView
+                android:id="@+id/mangainfo_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/mangainfo_name"
+                android:layout_below="@+id/mangainfo_name"
+                android:text="author"
+                android:textColor="@color/TextGray" />
+
+            <TextView
+                android:id="@+id/mangainfo_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/mangainfo_author"
+                android:layout_below="@+id/mangainfo_author"
+                android:text="status"
+                android:textColor="@color/TextGray" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/card_background" >
+
+            <com.aizen.manga.view.NoScrollGridView
+                android:id="@+id/mangainfo_chaptergrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:numColumns="4" >
+            </com.aizen.manga.view.NoScrollGridView>
+        </RelativeLayout>
+    </LinearLayout>
 
 </ScrollView>

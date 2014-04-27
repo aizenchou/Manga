@@ -7,7 +7,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,13 +15,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.aizen.manga.R;
 import com.aizen.manga.module.Chapter;
 import com.aizen.manga.module.Manga;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.view.animation.DecelerateInterpolator;
 
 public class NetAnalyse {
 

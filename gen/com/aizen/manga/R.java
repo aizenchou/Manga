@@ -25,7 +25,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int metaButtonBarStyle=0x7f010000;
     }
     public static final class color {
+        public static final int CardFragBackground=0x7f050003;
         public static final int TextBlack=0x7f050002;
+        public static final int TextBlue=0x7f050004;
         public static final int TextGray=0x7f050001;
         public static final int black_overlay=0x7f050000;
     }
@@ -71,10 +73,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int action_settings=0x7f0b0020;
         public static final int clear_cache=0x7f0b0021;
         public static final int container=0x7f0b0001;
-        public static final int dummy_button=0x7f0b0004;
-        public static final int fullscreen_content_controls=0x7f0b0003;
+        public static final int detailpager=0x7f0b0000;
+        public static final int dummy_button=0x7f0b0005;
+        public static final int fullscreen_content_controls=0x7f0b0004;
         public static final int imageView=0x7f0b0010;
-        public static final int imagepager=0x7f0b0002;
+        public static final int imagepager=0x7f0b0003;
         public static final int mangaCover=0x7f0b0011;
         public static final int mangaList=0x7f0b000e;
         public static final int mangaMark=0x7f0b0016;
@@ -82,17 +85,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int mangaStatus=0x7f0b0013;
         public static final int mangaUpdateDate=0x7f0b0014;
         public static final int mangaUpdateTo=0x7f0b0015;
-        public static final int mangainfo_author=0x7f0b0009;
-        public static final int mangainfo_btn_play=0x7f0b000c;
+        public static final int mangainfo_author=0x7f0b000b;
         public static final int mangainfo_chapter_name=0x7f0b000f;
         public static final int mangainfo_chaptergrid=0x7f0b000d;
-        public static final int mangainfo_cover=0x7f0b0007;
-        public static final int mangainfo_desc=0x7f0b000b;
-        public static final int mangainfo_name=0x7f0b0008;
-        public static final int mangainfo_status=0x7f0b000a;
-        public static final int pager=0x7f0b0000;
-        public static final int scrollView1=0x7f0b0006;
-        public static final int section_label=0x7f0b0005;
+        public static final int mangainfo_cover=0x7f0b0008;
+        public static final int mangainfo_desc=0x7f0b0009;
+        public static final int mangainfo_name=0x7f0b000a;
+        public static final int mangainfo_status=0x7f0b000c;
+        public static final int pager=0x7f0b0002;
+        public static final int scrollView1=0x7f0b0007;
+        public static final int section_label=0x7f0b0006;
         public static final int xlistview_footer_content=0x7f0b0017;
         public static final int xlistview_footer_hint_textview=0x7f0b0019;
         public static final int xlistview_footer_progressbar=0x7f0b0018;

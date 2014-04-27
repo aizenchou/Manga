@@ -3,5 +3,7 @@
     <color name="black_overlay">#66000000</color>
     <color name="TextGray">#999999</color>
     <color name="TextBlack">#000000</color>
+    <color name="CardFragBackground">#e5e5e5</color>
+    <color name="TextBlue">#A0C1FC</color>
 
 </resources>

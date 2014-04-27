@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="8dp"
-    android:background="#e5e5e5" >
+    android:background="@color/CardFragBackground" >
 
     <me.maxwin.view.XListView
         android:id="@+id/mangaList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
         android:divider="@null"
         android:dividerHeight="8dp" >
     </me.maxwin.view.XListView>
