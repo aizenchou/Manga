@@ -1,6 +1,5 @@
 package com.aizen.manga.fragment;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -92,17 +92,29 @@ public class MangaInfoFrag extends Fragment {
 			public void run() {
 				try {
 					System.out.println(url);
-					getMangaInfo(url);
+					mangaDetail = getMangaInfo(url);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
+		descView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				TextView textView = (TextView) v;
+				descView.setText(textView.getText().length() > 60 + "..."
+						.length() ? mangaDetail.getDescription().substring(0,
+						60)
+						+ "..." : mangaDetail.getDescription());
+			}
+		});
 		return rootView;
 	}
 
-	private void getMangaInfo(String url) throws Exception {
+	private Manga getMangaInfo(String url) throws Exception {
 		final Manga mangainfo = NetAnalyse.parseHtmlToInfo(url, getActivity()
 				.getCacheDir().getAbsolutePath());
 		final ArrayList<Chapter> chs = NetAnalyse.parseHtmlToChapters(url);
@@ -129,6 +141,7 @@ public class MangaInfoFrag extends Fragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return mangainfo;
 	}
 
 }
