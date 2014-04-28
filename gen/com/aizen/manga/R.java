@@ -57,53 +57,67 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int card_background_white=0x7f020001;
         public static final int cover=0x7f020002;
         public static final int empty_photo=0x7f020003;
-        public static final int ic_beer=0x7f020004;
-        public static final int ic_github=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int ic_undo=0x7f020007;
-        public static final int img_nature1=0x7f020008;
-        public static final int img_nature2=0x7f020009;
-        public static final int img_nature3=0x7f02000a;
-        public static final int img_nature4=0x7f02000b;
-        public static final int img_nature5=0x7f02000c;
-        public static final int tile=0x7f02000d;
-        public static final int xlistview_arrow=0x7f02000e;
+        public static final int ic_action_about=0x7f020004;
+        public static final int ic_action_search=0x7f020005;
+        public static final int ic_beer=0x7f020006;
+        public static final int ic_github=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int ic_undo=0x7f020009;
+        public static final int img_nature1=0x7f02000a;
+        public static final int img_nature2=0x7f02000b;
+        public static final int img_nature3=0x7f02000c;
+        public static final int img_nature4=0x7f02000d;
+        public static final int img_nature5=0x7f02000e;
+        public static final int tile=0x7f02000f;
+        public static final int xlistview_arrow=0x7f020010;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0020;
-        public static final int clear_cache=0x7f0b0021;
+        public static final int ResultAuthor=0x7f0b001c;
+        public static final int ResultCover=0x7f0b001a;
+        public static final int ResultDesc=0x7f0b0021;
+        public static final int ResultName=0x7f0b001b;
+        public static final int ResultRating=0x7f0b001f;
+        public static final int ResultShowDesc=0x7f0b0020;
+        public static final int ResultStatus=0x7f0b001d;
+        public static final int ResultType=0x7f0b001e;
+        public static final int SearchResultActivity=0x7f0b0006;
+        public static final int SearchResultFrag=0x7f0b0010;
+        public static final int SearchResultList=0x7f0b0011;
+        public static final int action_settings=0x7f0b002b;
+        public static final int clear_cache=0x7f0b002d;
         public static final int container=0x7f0b0001;
         public static final int detailpager=0x7f0b0000;
         public static final int dummy_button=0x7f0b0005;
         public static final int fullscreen_content_controls=0x7f0b0004;
-        public static final int imageView=0x7f0b0010;
+        public static final int imageView=0x7f0b0013;
         public static final int imagepager=0x7f0b0003;
-        public static final int mangaCover=0x7f0b0011;
-        public static final int mangaList=0x7f0b000e;
-        public static final int mangaMark=0x7f0b0016;
-        public static final int mangaName=0x7f0b0012;
-        public static final int mangaStatus=0x7f0b0013;
-        public static final int mangaUpdateDate=0x7f0b0014;
-        public static final int mangaUpdateTo=0x7f0b0015;
-        public static final int mangainfo_author=0x7f0b000b;
-        public static final int mangainfo_chapter_name=0x7f0b000f;
-        public static final int mangainfo_chaptergrid=0x7f0b000d;
-        public static final int mangainfo_cover=0x7f0b0008;
-        public static final int mangainfo_desc=0x7f0b0009;
-        public static final int mangainfo_name=0x7f0b000a;
-        public static final int mangainfo_status=0x7f0b000c;
+        public static final int mangaCover=0x7f0b0014;
+        public static final int mangaList=0x7f0b000f;
+        public static final int mangaMark=0x7f0b0019;
+        public static final int mangaName=0x7f0b0015;
+        public static final int mangaStatus=0x7f0b0016;
+        public static final int mangaUpdateDate=0x7f0b0017;
+        public static final int mangaUpdateTo=0x7f0b0018;
+        public static final int mangainfo_author=0x7f0b000c;
+        public static final int mangainfo_chapter_name=0x7f0b0012;
+        public static final int mangainfo_chaptergrid=0x7f0b000e;
+        public static final int mangainfo_cover=0x7f0b0009;
+        public static final int mangainfo_desc=0x7f0b000a;
+        public static final int mangainfo_name=0x7f0b000b;
+        public static final int mangainfo_status=0x7f0b000d;
         public static final int pager=0x7f0b0002;
-        public static final int scrollView1=0x7f0b0007;
-        public static final int section_label=0x7f0b0006;
-        public static final int xlistview_footer_content=0x7f0b0017;
-        public static final int xlistview_footer_hint_textview=0x7f0b0019;
-        public static final int xlistview_footer_progressbar=0x7f0b0018;
-        public static final int xlistview_header_arrow=0x7f0b001e;
-        public static final int xlistview_header_content=0x7f0b001a;
-        public static final int xlistview_header_hint_textview=0x7f0b001c;
-        public static final int xlistview_header_progressbar=0x7f0b001f;
-        public static final int xlistview_header_text=0x7f0b001b;
-        public static final int xlistview_header_time=0x7f0b001d;
+        public static final int scrollView1=0x7f0b0008;
+        public static final int searchManga=0x7f0b002c;
+        public static final int section_label=0x7f0b0007;
+        public static final int xlistview_footer_content=0x7f0b0022;
+        public static final int xlistview_footer_hint_textview=0x7f0b0024;
+        public static final int xlistview_footer_progressbar=0x7f0b0023;
+        public static final int xlistview_header_arrow=0x7f0b0029;
+        public static final int xlistview_header_content=0x7f0b0025;
+        public static final int xlistview_header_hint_textview=0x7f0b0027;
+        public static final int xlistview_header_progressbar=0x7f0b002a;
+        public static final int xlistview_header_text=0x7f0b0026;
+        public static final int xlistview_header_time=0x7f0b0028;
     }
     public static final class layout {
         public static final int activity_detail=0x7f030000;
@@ -119,8 +133,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int gridview_mangachapter=0x7f03000a;
         public static final int image_detail_fragment=0x7f03000b;
         public static final int listview_mangalist=0x7f03000c;
-        public static final int xlistview_footer=0x7f03000d;
-        public static final int xlistview_header=0x7f03000e;
+        public static final int listview_searchresultlist=0x7f03000d;
+        public static final int xlistview_footer=0x7f03000e;
+        public static final int xlistview_header=0x7f03000f;
     }
     public static final class menu {
         public static final int detail=0x7f0a0000;
@@ -130,59 +145,64 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int search_result=0x7f0a0004;
     }
     public static final class string {
+        public static final int action_search_title=0x7f070016;
         public static final int action_settings=0x7f070004;
         public static final int app_name=0x7f070000;
-        public static final int clear_cache_complete_toast=0x7f07001c;
-        public static final int clear_cache_menu=0x7f07001b;
+        public static final int clear_cache_complete_toast=0x7f070021;
+        public static final int clear_cache_menu=0x7f070020;
         public static final int domain=0x7f07000d;
         public static final int dummy_button=0x7f070007;
         public static final int dummy_content=0x7f070008;
-        public static final int fav_tab_title=0x7f070014;
+        public static final int fav_tab_title=0x7f070015;
         public static final int hello_world=0x7f07000a;
         public static final int host_url=0x7f070010;
         public static final int hot_manga_list=0x7f07000e;
-        public static final int hot_tab_title=0x7f070012;
-        public static final int imageview_description=0x7f07001d;
+        public static final int hot_tab_title=0x7f070013;
+        public static final int imageview_description=0x7f070022;
+        public static final int load_dialog_content=0x7f070019;
+        public static final int load_dialog_title=0x7f070018;
         public static final int manga_cover_description=0x7f07000c;
-        public static final int no_network_connection_toast=0x7f07001e;
-        public static final int notice=0x7f070011;
-        public static final int pref_default_display_name=0x7f070024;
-        public static final int pref_description_social_recommendations=0x7f070022;
+        public static final int no_network_connection_toast=0x7f070023;
+        public static final int notice=0x7f070012;
+        public static final int pref_default_display_name=0x7f070029;
+        public static final int pref_description_social_recommendations=0x7f070027;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f070026;
+        public static final int pref_header_data_sync=0x7f07002b;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f070020;
+        public static final int pref_header_general=0x7f070025;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f070029;
-        public static final int pref_ringtone_silent=0x7f07002c;
-        public static final int pref_title_add_friends_to_messages=0x7f070025;
-        public static final int pref_title_display_name=0x7f070023;
-        public static final int pref_title_new_message_notifications=0x7f07002a;
-        public static final int pref_title_ringtone=0x7f07002b;
-        public static final int pref_title_social_recommendations=0x7f070021;
-        public static final int pref_title_sync_frequency=0x7f070027;
-        public static final int pref_title_system_sync_settings=0x7f070028;
-        public static final int pref_title_vibrate=0x7f07002d;
-        public static final int rec_tab_title=0x7f070013;
+        public static final int pref_header_notifications=0x7f07002e;
+        public static final int pref_ringtone_silent=0x7f070031;
+        public static final int pref_title_add_friends_to_messages=0x7f07002a;
+        public static final int pref_title_display_name=0x7f070028;
+        public static final int pref_title_new_message_notifications=0x7f07002f;
+        public static final int pref_title_ringtone=0x7f070030;
+        public static final int pref_title_social_recommendations=0x7f070026;
+        public static final int pref_title_sync_frequency=0x7f07002c;
+        public static final int pref_title_system_sync_settings=0x7f07002d;
+        public static final int pref_title_vibrate=0x7f070032;
+        public static final int rec_tab_title=0x7f070014;
         public static final int recent_manga_list=0x7f07000f;
+        public static final int search_hint=0x7f070017;
+        public static final int search_url=0x7f070011;
         public static final int title_activity_detail=0x7f070005;
         public static final int title_activity_help=0x7f070009;
         public static final int title_activity_manga=0x7f070006;
         public static final int title_activity_search_result=0x7f07000b;
-        public static final int title_activity_settings=0x7f07001f;
+        public static final int title_activity_settings=0x7f070024;
         public static final int title_section1=0x7f070001;
         public static final int title_section2=0x7f070002;
         public static final int title_section3=0x7f070003;
-        public static final int xlistview_footer_hint_normal=0x7f070019;
-        public static final int xlistview_footer_hint_ready=0x7f07001a;
-        public static final int xlistview_header_hint_loading=0x7f070017;
-        public static final int xlistview_header_hint_normal=0x7f070015;
-        public static final int xlistview_header_hint_ready=0x7f070016;
-        public static final int xlistview_header_last_time=0x7f070018;
+        public static final int xlistview_footer_hint_normal=0x7f07001e;
+        public static final int xlistview_footer_hint_ready=0x7f07001f;
+        public static final int xlistview_header_hint_loading=0x7f07001c;
+        public static final int xlistview_header_hint_normal=0x7f07001a;
+        public static final int xlistview_header_hint_ready=0x7f07001b;
+        public static final int xlistview_header_last_time=0x7f07001d;
     }
     public static final class style {
         /** 
@@ -224,6 +244,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pref_general=0x7f040001;
         public static final int pref_headers=0x7f040002;
         public static final int pref_notification=0x7f040003;
+        public static final int searchable=0x7f040004;
     }
     public static final class styleable {
         /** 

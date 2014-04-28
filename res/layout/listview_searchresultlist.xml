@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginTop="2dp"
+    android:background="@drawable/card_background"
+    android:descendantFocusability="blocksDescendants" >
+
+    <ImageView
+        android:id="@+id/ResultCover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/cover" />
+
+    <TextView
+        android:id="@+id/ResultName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ResultCover"
+        android:layout_toRightOf="@+id/ResultCover"
+        android:text="name"
+        android:layout_marginLeft="6dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/TextBlack" />
+
+    <TextView
+        android:id="@+id/ResultAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ResultName"
+        android:layout_below="@+id/ResultName"
+        android:text="author"
+        android:textColor="@color/TextBlue" />
+    
+    <TextView
+        android:id="@+id/ResultStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ResultAuthor"
+        android:layout_below="@+id/ResultAuthor"
+        android:text="status"
+        android:textSize="10sp"
+        android:textColor="@color/TextGray"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/ResultType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ResultStatus"
+        android:layout_below="@+id/ResultStatus"
+        android:text="type"
+        android:textSize="10sp"
+        android:textColor="@color/TextGray"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <RatingBar
+        android:id="@+id/ResultRating"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ResultType"
+        android:layout_below="@+id/ResultType"
+        android:numStars="5"
+        android:rating="0"
+        android:stepSize="0.1" />
+
+    <ImageButton
+        android:id="@+id/ResultShowDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/white"
+        android:focusable="false"
+        android:src="@drawable/ic_action_about" />
+
+    <TextView
+        android:id="@+id/ResultDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ResultCover"
+        android:text="desc" />
+
+    
+
+</RelativeLayout>

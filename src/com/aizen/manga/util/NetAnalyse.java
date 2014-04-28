@@ -49,6 +49,31 @@ public class NetAnalyse {
 		return md5StrBuff.toString();
 	}
 
+	public static ArrayList<Manga> parseHtmlToResults(String URL,
+			String imageCacheDir) throws Exception {
+		ArrayList<Manga> results = new ArrayList<>();
+		Document doc = Jsoup.connect(URL).timeout(6000).get();
+		Elements liElements = doc.select("li.cf");
+		for (Element li : liElements) {
+			Manga result = new Manga();
+			Document lidoc = Jsoup.parseBodyFragment(li.html());
+			result.setLink(lidoc.select("div.book-cover > a").first()
+					.attr("href"));
+			result.setCoverURL(lidoc.select("div.book-cover img").first()
+					.attr("src"));
+			result.setCover(ImageManager.getBitmapFromURL(result.getCoverURL(),
+					imageCacheDir));
+			result.setName(lidoc.select("dt").text());
+			result.setStatusIntro(lidoc.select("dd.status strong").first().text()+lidoc.select("dd.status span").get(1).text());
+			result.setTag(lidoc.select("dd.tags").get(1).child(2).text());
+			result.setAuthor(lidoc.select("dd.tags").get(2).text());
+			result.setMark(lidoc.select("p.score-avg > strong").text());
+			result.setDescription(lidoc.select("dd.intro").text());
+			results.add(result);
+		}
+		return results;
+	}
+
 	public static ArrayList<String> parseHtmlToPageURLs(String URL) {
 		try {
 			String resultString = catchData(URL);
@@ -66,7 +91,7 @@ public class NetAnalyse {
 	public static ArrayList<Manga> parseHtmlToList(String URL,
 			String imageCacheDir) throws Exception {
 		ArrayList<Manga> mangas = new ArrayList<>();
-		Document doc = Jsoup.connect(URL).timeout(3000).get();
+		Document doc = Jsoup.connect(URL).timeout(6000).get();
 		Elements listElements = doc.select("ul#contList > li");
 		for (Element li : listElements) {
 			Manga manga = new Manga();
@@ -92,7 +117,7 @@ public class NetAnalyse {
 			 * manga.getUpdateto() + manga.getMark());
 			 */
 			mangas.add(manga);
-			//System.out.println(ContextUtil.getInstance().getResources().getString(R.string.domain));
+			// System.out.println(ContextUtil.getInstance().getResources().getString(R.string.domain));
 		}
 		return mangas;
 
@@ -106,7 +131,7 @@ public class NetAnalyse {
 		// cookieValue = connection.getHeaderField("Set-Cookie");
 		// System.out.println(cookieValue);
 		Manga mangaInfo = new Manga();
-		Document doc = Jsoup.connect(URL).get();
+		Document doc = Jsoup.connect(URL).timeout(6000).get();
 		Element cont = doc.select("div.book-cont").first();
 		Document contDoc = Jsoup.parse(cont.html());
 		mangaInfo.setCoverURL(contDoc.select("p.hcover > img").first()
@@ -127,7 +152,7 @@ public class NetAnalyse {
 
 	public static ArrayList<Chapter> parseHtmlToChapters(String URL)
 			throws IOException {
-		Document doc = Jsoup.connect(URL).get();
+		Document doc = Jsoup.connect(URL).timeout(6000).get();
 		Elements eles = doc.select("div.chapter-list");
 		ArrayList<Chapter> chapters = new ArrayList<>();
 		for (Element ele : eles) {

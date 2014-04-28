@@ -9,11 +9,15 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.SearchManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
 
 public class MainActivity extends Activity implements ActionBar.TabListener {
 
@@ -76,6 +80,13 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+
+		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		ComponentName cn = new ComponentName(this, SearchResultActivity.class);
+		SearchView searchView = (SearchView) menu.findItem(R.id.searchManga)
+				.getActionView();
+		searchView.setSearchableInfo(searchManager.getSearchableInfo(cn));
+
 		return true;
 	}
 

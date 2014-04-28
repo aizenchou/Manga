@@ -86,7 +86,9 @@ public class MangaInfoFrag extends Fragment {
 		chaptersAdapter = new ChapterListAdapter(getActivity(), chapters,
 				layoutID);
 		chapterGridView.setAdapter(chaptersAdapter);
-		dialog = ProgressDialog.show(getActivity(), "Loading", "正在加载。。。。，请稍等！");
+		dialog = ProgressDialog.show(getActivity(),
+				getString(R.string.load_dialog_title),
+				getString(R.string.load_dialog_title));
 		executorService.submit(new Runnable() {
 			@Override
 			public void run() {
