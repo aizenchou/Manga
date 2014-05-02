@@ -43,5 +43,8 @@
     <string name="clear_cache_complete_toast">缓存已清除</string>
     <string name="imageview_description">图片缩略图</string>
     <string name="no_network_connection_toast">无网络连接</string>
+    
+    <string name="itemdeleted">取消喜欢</string>
+    <string name="taptoundo">点击返回</string>
 
 </resources>

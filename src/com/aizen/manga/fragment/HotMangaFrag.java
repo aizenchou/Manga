@@ -43,10 +43,20 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 
 	// private ProgressDialog dialog;
 
+	private static HotMangaFrag uniqueHotMangaFrag = null;
+
+	public static HotMangaFrag newInstance() {
+		if (uniqueHotMangaFrag == null) {
+			uniqueHotMangaFrag = new HotMangaFrag();
+		}
+		return uniqueHotMangaFrag;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
+		mangas = new ArrayList<>();
 		View rootView = inflater.inflate(R.layout.fragment_manga_list,
 				container, false);
 		mangaListView = (XListView) rootView.findViewById(R.id.mangaList);
@@ -59,14 +69,16 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				//position位置从1开始是因为位置0被headview占用了
+				// position位置从1开始是因为位置0被headview占用了
 				Intent it = new Intent(getActivity(), DetailActivity.class);
-				Bundle bundle=new Bundle();
-				bundle.putString(MangaInfoFrag.MANGA_LINK_STRING, mangas.get(position-1).getLink());
-				it.putExtras(bundle);       // it.putExtra(“test”, "shuju”);
-				startActivity(it); 
+				Bundle bundle = new Bundle();
+				bundle.putString(MangaInfoFrag.MANGA_LINK_STRING, 
+						getActivity().getString(R.string.domain)
+						+ mangas.get(position - 1).getLink());
+				it.putExtras(bundle); // it.putExtra(“test”, "shuju”);
+				startActivity(it);
 				Toast.makeText(getActivity(),
-						mangas.get(position-1).getLink(), Toast.LENGTH_SHORT)
+						mangas.get(position - 1).getLink(), Toast.LENGTH_SHORT)
 						.show();
 			}
 		});
@@ -84,7 +96,9 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 			@Override
 			public void run() {
 				try {
-					//mangas.add(new Manga("", "naruto", "anben", "9.9", "none"));
+					// mangas = null;
+					// mangas.add(new Manga("", "naruto", "anben", "9.9",
+					// "none"));
 					refreshHotMangaList(page);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -109,7 +123,8 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					//mangas.add(new Manga("", "naruto", "anben", "9.9", "none"));
+					// mangas.add(new Manga("", "naruto", "anben", "9.9",
+					// "none"));
 					mangas.addAll(mangaDataList);
 					mangasAdapter.notifyDataSetChanged();
 					swingBottomInAnimationAdapter.notifyDataSetChanged();

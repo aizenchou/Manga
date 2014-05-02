@@ -41,10 +41,20 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 
 	// private ProgressDialog dialog;
 
+	private static RecentMangaFrag uniqueRecentMangaFrag = null;
+
+	public static RecentMangaFrag newInstance() {
+		if (uniqueRecentMangaFrag == null) {
+			uniqueRecentMangaFrag = new RecentMangaFrag();
+		}
+		return uniqueRecentMangaFrag;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
+		mangas = new ArrayList<>();
 		View rootView = inflater.inflate(R.layout.fragment_manga_list,
 				container, false);
 		mangaListView = (XListView) rootView.findViewById(R.id.mangaList);
@@ -58,12 +68,14 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 					int position, long id) {
 				// TODO Auto-generated method stub
 				Intent it = new Intent(getActivity(), DetailActivity.class);
-				Bundle bundle=new Bundle();
-				bundle.putString(MangaInfoFrag.MANGA_LINK_STRING, mangas.get(position-1).getLink());
-				it.putExtras(bundle);       // it.putExtra(¡°test¡±, "shuju¡±);
-				startActivity(it); 
+				Bundle bundle = new Bundle();
+				bundle.putString(MangaInfoFrag.MANGA_LINK_STRING, 
+						getActivity().getString(R.string.domain)
+						+ mangas.get(position - 1).getLink());
+				it.putExtras(bundle); // it.putExtra(¡°test¡±, "shuju¡±);
+				startActivity(it);
 				Toast.makeText(getActivity(),
-						mangas.get(position-1).getLink(), Toast.LENGTH_SHORT)
+						mangas.get(position - 1).getLink(), Toast.LENGTH_SHORT)
 						.show();
 			}
 		});
@@ -81,6 +93,7 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 			@Override
 			public void run() {
 				try {
+					// mangas = null;
 					refreshRecMangaList(page);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

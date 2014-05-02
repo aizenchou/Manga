@@ -64,7 +64,9 @@ public class NetAnalyse {
 			result.setCover(ImageManager.getBitmapFromURL(result.getCoverURL(),
 					imageCacheDir));
 			result.setName(lidoc.select("dt").text());
-			result.setStatusIntro(lidoc.select("dd.status strong").first().text()+lidoc.select("dd.status span").get(1).text());
+			result.setStatusIntro(lidoc.select("dd.status strong").first()
+					.text()
+					+ lidoc.select("dd.status span").get(1).text());
 			result.setTag(lidoc.select("dd.tags").get(1).child(2).text());
 			result.setAuthor(lidoc.select("dd.tags").get(2).text());
 			result.setMark(lidoc.select("p.score-avg > strong").text());
@@ -134,6 +136,10 @@ public class NetAnalyse {
 		Document doc = Jsoup.connect(URL).timeout(6000).get();
 		Element cont = doc.select("div.book-cont").first();
 		Document contDoc = Jsoup.parse(cont.html());
+		mangaInfo.setLink(URL);
+		mangaInfo.setId(URL.substring(URL.lastIndexOf("/book/") + 6,
+				URL.length() - 1));
+		System.out.println(mangaInfo.getId());
 		mangaInfo.setCoverURL(contDoc.select("p.hcover > img").first()
 				.attr("src"));
 		mangaInfo.setCover(ImageManager.getBitmapFromURL(

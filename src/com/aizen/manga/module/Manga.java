@@ -22,6 +22,7 @@ public class Manga {
 	private String coverURL;
 	private Bitmap cover;
 	private String updateto;
+	private boolean isLike;
 	private ArrayList<Chapter> chapters;
 
 	public Manga(String id, String name, String author, String publishDate,
@@ -216,6 +217,14 @@ public class Manga {
 
 	public void setChapters(ArrayList<Chapter> chapters) {
 		this.chapters = chapters;
+	}
+
+	public boolean isLike() {
+		return isLike;
+	}
+
+	public void setLike(boolean isLike) {
+		this.isLike = isLike;
 	}
 
 }

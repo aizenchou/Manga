@@ -9,6 +9,7 @@ import com.aizen.manga.R;
 import com.aizen.manga.adapter.ChapterListAdapter;
 import com.aizen.manga.module.Chapter;
 import com.aizen.manga.module.Manga;
+import com.aizen.manga.sql.MangaDBManager;
 import com.aizen.manga.util.NetAnalyse;
 import com.aizen.manga.view.NoScrollGridView;
 
@@ -23,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,10 +46,18 @@ public class MangaInfoFrag extends Fragment {
 	private String url;
 	private ImageView coverView;
 	private TextView nameView, authorView, descView, statusView;
+	private ImageButton shareBtn, favorBtn, downloadBtn, refreshBtn;
 	NoScrollGridView chapterGridView;
 	ArrayList<Chapter> chapters = new ArrayList<>();
 	ChapterListAdapter chaptersAdapter;
 	private ProgressDialog dialog;
+	private MangaDBManager mangadbmgr;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		mangadbmgr = new MangaDBManager(getActivity());
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,15 +65,17 @@ public class MangaInfoFrag extends Fragment {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View rootView = inflater.inflate(R.layout.fragment_manga_info,
 				container, false);
-		url = getActivity().getString(R.string.domain)
-				+ getArguments().getString(MANGA_LINK_STRING);
+		url = getArguments().getString(MANGA_LINK_STRING);
 		coverView = (ImageView) rootView.findViewById(R.id.mangainfo_cover);
 		nameView = (TextView) rootView.findViewById(R.id.mangainfo_name);
 		authorView = (TextView) rootView.findViewById(R.id.mangainfo_author);
 		descView = (TextView) rootView.findViewById(R.id.mangainfo_desc);
 		statusView = (TextView) rootView.findViewById(R.id.mangainfo_status);
-		chapterGridView = (NoScrollGridView) rootView
-				.findViewById(R.id.mangainfo_chaptergrid);
+		chapterGridView = (NoScrollGridView) rootView.findViewById(R.id.mangainfo_chaptergrid);
+		shareBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_share_btn);
+		favorBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_favor_btn);
+		downloadBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_download_btn);
+		refreshBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_refresh_btn);
 		chapterGridView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -101,6 +113,15 @@ public class MangaInfoFrag extends Fragment {
 				}
 			}
 		});
+		favorBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				mangadbmgr.add(mangaDetail);
+				mangadbmgr.setLike(mangaDetail.getId());
+			}
+		});
 		descView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -114,6 +135,12 @@ public class MangaInfoFrag extends Fragment {
 			}
 		});
 		return rootView;
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		mangadbmgr.closeDB();
 	}
 
 	private Manga getMangaInfo(String url) throws Exception {

@@ -137,11 +137,11 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 			// below).
 			switch (position) {
 			case 0:
-				return new HotMangaFrag();
+				return HotMangaFrag.newInstance();
 			case 1:
-				return new RecentMangaFrag();
+				return RecentMangaFrag.newInstance();
 			case 2:
-				return new MyMangaFrag();
+				return MyMangaFrag.newInstance();
 			}
 			return null;
 		}

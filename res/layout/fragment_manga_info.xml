@@ -67,6 +67,55 @@
                 android:textColor="@color/TextGray" />
         </RelativeLayout>
 
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
+            android:background="@drawable/card_background"
+            android:columnCount="4"
+            android:rowCount="1" >
+
+            <ImageButton
+                android:id="@+id/mangainfo_share_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="left|top"
+                android:layout_row="0"
+                android:background="@android:color/white"
+                android:src="@drawable/ic_action_share" />
+
+            <ImageButton
+                android:id="@+id/mangainfo_favor_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="left|top"
+                android:layout_row="0"
+                android:background="@android:color/white"
+                android:src="@drawable/ic_action_favorite" />
+
+            <ImageButton
+                android:id="@+id/mangainfo_refresh_btn"
+                android:layout_column="2"
+                android:layout_gravity="right|top"
+                android:layout_row="0"
+                android:background="@android:color/white"
+                android:src="@drawable/ic_action_refresh" />
+
+            <ImageButton
+                android:id="@+id/mangainfo_download_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:layout_gravity="left|top"
+                android:layout_row="0"
+                android:background="@android:color/white"
+                android:src="@drawable/ic_action_download" />
+
+        </GridLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
