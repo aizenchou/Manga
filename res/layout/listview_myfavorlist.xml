@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginTop="2dp"
+    android:background="@drawable/card_background" >
+
+    <ImageView
+        android:id="@+id/myFavorCover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/manga_cover_description"
+        android:src="@drawable/cover" />
+
+    <TextView
+        android:id="@+id/myFavorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="6dp"
+        android:layout_toRightOf="@+id/myFavorCover"
+        android:text="name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/TextBlack" />
+
+    <TextView
+        android:id="@+id/myFavorStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myFavorName"
+        android:layout_marginLeft="6dp"
+        android:layout_toRightOf="@+id/myFavorCover"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="status"
+        android:textColor="@color/TextGray" />
+
+    <TextView
+        android:id="@+id/lastRead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/myFavorStatus"
+        android:layout_below="@+id/myFavorStatus"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="lastread"
+        android:textColor="@color/TextBlue" />
+
+</RelativeLayout>

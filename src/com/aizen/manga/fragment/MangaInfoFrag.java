@@ -45,8 +45,9 @@ public class MangaInfoFrag extends Fragment {
 	private Manga mangaDetail = new Manga();
 	private String url;
 	private ImageView coverView;
-	private TextView nameView, authorView, descView, statusView;
-	private ImageButton shareBtn, favorBtn, downloadBtn, refreshBtn;
+	private TextView nameView, authorView, descView, statusView, lastReadView;
+	private ImageButton shareBtn, favorBtn, downloadBtn;
+	// private ImageButton refreshBtn;
 	NoScrollGridView chapterGridView;
 	ArrayList<Chapter> chapters = new ArrayList<>();
 	ChapterListAdapter chaptersAdapter;
@@ -71,27 +72,34 @@ public class MangaInfoFrag extends Fragment {
 		authorView = (TextView) rootView.findViewById(R.id.mangainfo_author);
 		descView = (TextView) rootView.findViewById(R.id.mangainfo_desc);
 		statusView = (TextView) rootView.findViewById(R.id.mangainfo_status);
-		chapterGridView = (NoScrollGridView) rootView.findViewById(R.id.mangainfo_chaptergrid);
-		shareBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_share_btn);
-		favorBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_favor_btn);
-		downloadBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_download_btn);
-		refreshBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_refresh_btn);
+		lastReadView = (TextView) rootView.findViewById(R.id.mangainfo_lastRead);
+		chapterGridView = (NoScrollGridView) rootView
+				.findViewById(R.id.mangainfo_chaptergrid);
+		shareBtn = (ImageButton) rootView
+				.findViewById(R.id.mangainfo_share_btn);
+		favorBtn = (ImageButton) rootView
+				.findViewById(R.id.mangainfo_favor_btn);
+		downloadBtn = (ImageButton) rootView
+				.findViewById(R.id.mangainfo_download_btn);
+		// refreshBtn = (ImageButton)
+		// rootView.findViewById(R.id.mangainfo_refresh_btn);
 		chapterGridView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getActivity(), chapters.get(position).getLink(),
+				final Chapter chapter = chapters.get(position);
+				Toast.makeText(getActivity(), chapter.getLink(),
 						Toast.LENGTH_SHORT).show();
-				final String chapterUrl = getString(R.string.domain)
-						+ chapters.get(position).getLink();
-				System.out.println(chapterUrl);
-				final Intent it = new Intent(getActivity(), MangaActivity.class);
-				final Bundle bundle = new Bundle();
-				bundle.putString(MangaActivity.CHAPTER_KEY, chapterUrl);
-				it.putExtras(bundle);
-				startActivity(it);
+				executorService.submit(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						setLastRead(mangaDetail.getId(), chapter);
+					}
+				});
 			}
 		});
 		int layoutID = R.layout.gridview_mangachapter;
@@ -100,7 +108,7 @@ public class MangaInfoFrag extends Fragment {
 		chapterGridView.setAdapter(chaptersAdapter);
 		dialog = ProgressDialog.show(getActivity(),
 				getString(R.string.load_dialog_title),
-				getString(R.string.load_dialog_title));
+				getString(R.string.load_dialog_content));
 		executorService.submit(new Runnable() {
 			@Override
 			public void run() {
@@ -114,12 +122,23 @@ public class MangaInfoFrag extends Fragment {
 			}
 		});
 		favorBtn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				mangadbmgr.add(mangaDetail);
-				mangadbmgr.setLike(mangaDetail.getId());
+				if (mangaDetail.isLike()) {
+					mangadbmgr.delete(mangaDetail.getId());
+					favorBtn.setImageDrawable(getActivity().getResources()
+							.getDrawable(R.drawable.ic_action_favorite));
+					mangaDetail.setLike(false);
+				} else {
+					mangadbmgr.add(mangaDetail);
+					mangadbmgr.setLike(mangaDetail.getId());
+					favorBtn.setImageDrawable(getActivity().getResources()
+							.getDrawable(R.drawable.ic_action_favorite_red));
+					mangaDetail.setLike(true);
+				}
+
 			}
 		});
 		descView.setOnClickListener(new OnClickListener() {
@@ -146,6 +165,9 @@ public class MangaInfoFrag extends Fragment {
 	private Manga getMangaInfo(String url) throws Exception {
 		final Manga mangainfo = NetAnalyse.parseHtmlToInfo(url, getActivity()
 				.getCacheDir().getAbsolutePath());
+		mangainfo.setLike(mangadbmgr.isLike(mangainfo.getId()));
+		System.out.println(mangainfo.isLike());
+		mangainfo.setLastRead(mangadbmgr.getLastRead(mangainfo.getId()));
 		final ArrayList<Chapter> chs = NetAnalyse.parseHtmlToChapters(url);
 		try {
 			// TODO Auto-generated method stub
@@ -153,11 +175,16 @@ public class MangaInfoFrag extends Fragment {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
+					if (mangainfo.isLike()) {
+						favorBtn.setImageDrawable(getActivity().getResources()
+								.getDrawable(R.drawable.ic_action_favorite_red));
+					}
 					coverView.setImageBitmap(mangainfo.getCover());
 					nameView.setText(mangainfo.getName());
 					authorView.setText(mangainfo.getAuthor());
 					System.out.println(mangainfo.getAuthor());
 					statusView.setText(mangainfo.getStatusIntro());
+					lastReadView.setText(mangainfo.getLastRead() == null?"漫画进度：还没开始看":"上次看到："+mangainfo.getLastRead());
 					descView.setText(mangainfo.getDescription().length() > 60 ? mangainfo
 							.getDescription().substring(0, 60) + "..."
 							: mangainfo.getDescription());
@@ -171,6 +198,25 @@ public class MangaInfoFrag extends Fragment {
 			e.printStackTrace();
 		}
 		return mangainfo;
+	}
+	
+	private void setLastRead(String id, final Chapter chapter) {
+		mangadbmgr.setLastRead(id, chapter.getTitle());
+		handler.post(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				final String chapterUrl = getString(R.string.domain)
+						+ chapter.getLink();
+				System.out.println(chapterUrl);
+				final Intent it = new Intent(getActivity(), MangaActivity.class);
+				final Bundle bundle = new Bundle();
+				bundle.putString(MangaActivity.CHAPTER_KEY, chapterUrl);
+				it.putExtras(bundle);
+				startActivity(it);
+			}
+		});
 	}
 
 }

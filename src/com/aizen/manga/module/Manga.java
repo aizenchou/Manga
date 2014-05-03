@@ -24,6 +24,7 @@ public class Manga {
 	private String updateto;
 	private boolean isLike;
 	private ArrayList<Chapter> chapters;
+	private String lastRead;
 
 	public Manga(String id, String name, String author, String publishDate,
 			String updateDate, String lcoation, String tag, String otherName,
@@ -225,6 +226,14 @@ public class Manga {
 
 	public void setLike(boolean isLike) {
 		this.isLike = isLike;
+	}
+
+	public String getLastRead() {
+		return lastRead;
+	}
+
+	public void setLastRead(String lastRead) {
+		this.lastRead = lastRead;
 	}
 
 }

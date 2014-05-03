@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import com.aizen.manga.DetailActivity;
 import com.aizen.manga.R;
 import com.aizen.manga.adapter.MangaListAdapter;
+import com.aizen.manga.adapter.MyFavorListAdapter;
 import com.aizen.manga.module.Manga;
 import com.aizen.manga.sql.MangaDBManager;
 import com.nhaarman.listviewanimations.itemmanipulation.OnDismissCallback;
@@ -27,9 +28,10 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class MyMangaFrag extends Fragment implements OnDismissCallback,DeleteItemCallback {
+public class MyMangaFrag extends Fragment implements OnDismissCallback,
+		DeleteItemCallback {
 
-	MangaListAdapter mangasAdapter;
+	MyFavorListAdapter myFavorListAdapter;
 	SwingBottomInAnimationAdapter swingBottomInAnimationAdapter;
 	ListView myFavorListView;
 	MangaDBManager mangadbmgr;
@@ -38,20 +40,20 @@ public class MyMangaFrag extends Fragment implements OnDismissCallback,DeleteIte
 	private ExecutorService executorService = Executors.newFixedThreadPool(10);
 
 	private static MyMangaFrag uniqueMyMangaFrag = null;
-	
+
 	public static MyMangaFrag newInstance() {
 		if (uniqueMyMangaFrag == null) {
 			uniqueMyMangaFrag = new MyMangaFrag();
 		}
 		return uniqueMyMangaFrag;
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mangadbmgr = new MangaDBManager(getActivity());
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class MyMangaFrag extends Fragment implements OnDismissCallback,DeleteIte
 		View rootView = inflater.inflate(R.layout.fragment_myfavor_list,
 				container, false);
 		myFavorListView = (ListView) rootView.findViewById(R.id.mangaList);
-		int layoutID = R.layout.listview_mangalist;
+		int layoutID = R.layout.listview_myfavorlist;
 		myFavorListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -78,20 +80,20 @@ public class MyMangaFrag extends Fragment implements OnDismissCallback,DeleteIte
 						Toast.LENGTH_SHORT).show();
 			}
 		});
-		mangasAdapter = new MangaListAdapter(getActivity(), layoutID,
-				myFavorMangas);
+		myFavorListAdapter = new MyFavorListAdapter(getActivity(), layoutID,
+				myFavorMangas, getActivity().getCacheDir().getAbsolutePath());
 		swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
-				new SwipeDismissAdapter(mangasAdapter, this));
+				new SwipeDismissAdapter(myFavorListAdapter, this));
 		swingBottomInAnimationAdapter.setInitialDelayMillis(300);
 		swingBottomInAnimationAdapter.setAbsListView(myFavorListView);
 		myFavorListView.setAdapter(swingBottomInAnimationAdapter);
 		executorService.submit(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				try {
-					//myFavorMangas = null;
+					// myFavorMangas = null;
 					getLikedMangaList();
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -101,35 +103,34 @@ public class MyMangaFrag extends Fragment implements OnDismissCallback,DeleteIte
 		return rootView;
 	}
 
-	
 	public void getLikedMangaList() {
 		final ArrayList<Manga> queryResult = mangadbmgr.queryLikedMangas();
-		System.out.println(queryResult.size()+"aaaaaaaaaaaaaaaaaaaaa");
+		System.out.println(queryResult.size() + "aaaaaaaaaaaaaaaaaaaaa");
 		handler.post(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				myFavorMangas.addAll(queryResult);
-				mangasAdapter.notifyDataSetChanged();
+				myFavorListAdapter.notifyDataSetChanged();
 				swingBottomInAnimationAdapter.notifyDataSetChanged();
 			}
 		});
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		mangadbmgr.closeDB();
 	}
-	
+
 	@Override
 	public void onDismiss(final AbsListView listView,
 			final int[] reverseSortedPositions) {
 		// TODO Auto-generated method stub
 		for (final int position : reverseSortedPositions) {
 			executorService.submit(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
@@ -137,13 +138,14 @@ public class MyMangaFrag extends Fragment implements OnDismissCallback,DeleteIte
 					mangadbmgr.setUnlike(idString);
 					mangadbmgr.delete(idString);
 					handler.post(new Runnable() {
-						
+
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
 							myFavorMangas.remove(position);
-							mangasAdapter.notifyDataSetChanged();
-							swingBottomInAnimationAdapter.notifyDataSetChanged();
+							myFavorListAdapter.notifyDataSetChanged();
+							swingBottomInAnimationAdapter
+									.notifyDataSetChanged();
 						}
 					});
 				}
@@ -155,7 +157,7 @@ public class MyMangaFrag extends Fragment implements OnDismissCallback,DeleteIte
 	@Override
 	public void deleteItem(int arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

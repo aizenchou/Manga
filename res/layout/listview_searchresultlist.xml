@@ -44,7 +44,7 @@
         android:layout_alignLeft="@+id/ResultAuthor"
         android:layout_below="@+id/ResultAuthor"
         android:text="status"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:textColor="@color/TextGray"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -55,7 +55,7 @@
         android:layout_alignLeft="@+id/ResultStatus"
         android:layout_below="@+id/ResultStatus"
         android:text="type"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:textColor="@color/TextGray"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
