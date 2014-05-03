@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class SearchResultListAdapter extends BaseAdapter {
@@ -86,23 +87,28 @@ public class SearchResultListAdapter extends BaseAdapter {
 		listItemView.resultType.setText(resultListItems.get(position).getTag());
 		listItemView.resultDesc.setText(resultListItems.get(position).getDescription());
 		listItemView.resultDesc.setVisibility(View.GONE);
-		
-		OnClickListener imageButtonListener = new OnClickListener() {
-			
+		listItemView.resultShowDesc.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (v.getId()==listItemView.resultShowDesc.getId()) {
+				RelativeLayout singleRowLayout = (RelativeLayout)v.getParent();
+				TextView descTextView = (TextView)singleRowLayout.getChildAt(7);
+				System.out.println(descTextView.getText());
+				if (descTextView.isShown()) {
+					descTextView.setVisibility(View.GONE);
+				} else {
+					descTextView.setVisibility(View.VISIBLE);
+				}
+				/*if (v.getId()==listItemView.resultShowDesc.getId()) {
 					if (listItemView.resultDesc.isShown()) {
 						listItemView.resultDesc.setVisibility(View.GONE);
 					}else {
 						listItemView.resultDesc.setVisibility(View.VISIBLE);
 					}
 					
-				}
+				}*/
 			}
-		};
-		listItemView.resultShowDesc.setOnClickListener(imageButtonListener);
+		});
 
 		return convertView;
 	}

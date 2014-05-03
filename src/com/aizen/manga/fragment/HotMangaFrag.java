@@ -83,8 +83,7 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 			}
 		});
 		mangasAdapter = new MangaListAdapter(getActivity(), layoutID, mangas);
-		swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
-				new SwipeDismissAdapter(mangasAdapter, this));
+		swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(mangasAdapter);
 		swingBottomInAnimationAdapter.setInitialDelayMillis(300);
 		swingBottomInAnimationAdapter.setAbsListView(mangaListView);
 		mangaListView.setAdapter(swingBottomInAnimationAdapter);
