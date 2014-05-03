@@ -93,11 +93,11 @@ public class MangaActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_manga);
 
-		imageurls.add("http://i3.manhuadao.com/bcover/2012/12/261757398_h.jpg");
-		imageurls
-				.add("http://cartoon.jide123.cc:8080/manhuatuku/1835/2014417171542670.jpg");
-		imageurls
-				.add("http://t6.mangafiles.com:88/Files/Images/3682/99100/imanhua_001.jpg");
+	//	imageurls.add("http://i3.manhuadao.com/bcover/2012/12/261757398_h.jpg");
+	//	imageurls
+	//			.add("http://cartoon.jide123.cc:8080/manhuatuku/1835/2014417171542670.jpg");
+	//	imageurls
+	//			.add("http://t6.mangafiles.com:88/Files/Images/3682/99100/imanhua_001.jpg");
 	//	imageurls.addAll(getIntent().getExtras().getStringArrayList(CHAPTER_LINK_KEY));
 		chapter = getIntent().getExtras().getString(CHAPTER_KEY);
 		System.out.println(chapter);
@@ -167,6 +167,7 @@ public class MangaActivity extends Activity implements OnClickListener {
 			// Start low profile mode and hide ActionBar
 			mPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 			actionBar.hide();
+			findViewById(R.id.fullscreen_content_controls).setVisibility(View.INVISIBLE);
 		}
 		executorService.submit(new Runnable() {
 			@Override
