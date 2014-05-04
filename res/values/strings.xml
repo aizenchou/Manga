@@ -13,6 +13,8 @@
     <string name="title_activity_help">HelpActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_search_result">SearchResultActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="manga_cover_description">漫画封面</string>
     
     

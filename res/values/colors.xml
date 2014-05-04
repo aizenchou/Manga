@@ -4,6 +4,12 @@
     <color name="TextGray">#999999</color>
     <color name="TextBlack">#000000</color>
     <color name="CardFragBackground">#e5e5e5</color>
-    <color name="TextBlue">#A0C1FC</color>
+    <color name="TextBlue">#1286C8</color>
+    <color name="DrawerGray">#F7F7F7</color>
+    <color name="DrawerWhite">#FFFFFF</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="ActionBarBlue">#FF3F9FE0</color>
+    <color name="ActionBarHintWhite">#AAFFFFFF</color>
+    <color name="ActionBarTitleWhite">#FFFFFFFF</color>
 
 </resources>

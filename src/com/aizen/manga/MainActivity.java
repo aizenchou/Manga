@@ -2,7 +2,11 @@ package com.aizen.manga;
 
 import com.aizen.manga.fragment.HotMangaFrag;
 import com.aizen.manga.fragment.MyMangaFrag;
+import com.aizen.manga.fragment.NavigationDrawerFragment;
+import com.aizen.manga.fragment.NavigationDrawerFragment.NavigationDrawerCallbacks;
 import com.aizen.manga.fragment.RecentMangaFrag;
+import com.astuetz.PagerSlidingTabStrip;
+import com.aizen.manga.R;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -12,14 +16,22 @@ import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
-public class MainActivity extends Activity implements ActionBar.TabListener {
+public class MainActivity extends Activity implements NavigationDrawerCallbacks {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -35,14 +47,24 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	 */
 	ViewPager mViewPager;
 
+	private NavigationDrawerFragment mNavigationDrawerFragment;
+
+	private PagerSlidingTabStrip tabs;
+	private Drawable oldBackground = null;
+	private int currentColor;
+	private final Handler handler = new Handler();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		currentColor = getResources().getColor(R.color.ActionBarBlue);
+		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
+				.findFragmentById(R.id.main_navigation_drawer);
+		mNavigationDrawerFragment.setUp(R.id.main_navigation_drawer,
+				(DrawerLayout) findViewById(R.id.drawer_layout));
 		// Set up the action bar.
-		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
@@ -55,24 +77,76 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
 		// a reference to the Tab.
-		mViewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-					@Override
-					public void onPageSelected(int position) {
-						actionBar.setSelectedNavigationItem(position);
-					}
-				});
+		tabs.setViewPager(mViewPager);
+		changeColor(currentColor);
+	}
 
-		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-			// Create a tab with text corresponding to the page title defined by
-			// the adapter. Also specify this Activity object, which implements
-			// the TabListener interface, as the callback (listener) for when
-			// this tab is selected.
-			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
-					.setTabListener(this));
+	private Drawable.Callback drawableCallback = new Drawable.Callback() {
+		@Override
+		public void invalidateDrawable(Drawable who) {
+			getActionBar().setBackgroundDrawable(who);
 		}
+
+		@Override
+		public void scheduleDrawable(Drawable who, Runnable what, long when) {
+			handler.postAtTime(what, when);
+		}
+
+		@Override
+		public void unscheduleDrawable(Drawable who, Runnable what) {
+			handler.removeCallbacks(what);
+		}
+	};
+
+	private void changeColor(int newColor) {
+
+		tabs.setIndicatorColor(newColor);
+
+		// change ActionBar color just if an ActionBar is available
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+
+			Drawable colorDrawable = new ColorDrawable(newColor);
+			Drawable bottomDrawable = getResources().getDrawable(
+					R.drawable.actionbar_bottom);
+			LayerDrawable ld = new LayerDrawable(new Drawable[] {
+					colorDrawable, bottomDrawable });
+
+			if (oldBackground == null) {
+
+				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+					ld.setCallback(drawableCallback);
+				} else {
+					getActionBar().setBackgroundDrawable(ld);
+				}
+
+			} else {
+
+				TransitionDrawable td = new TransitionDrawable(new Drawable[] {
+						oldBackground, ld });
+
+				// workaround for broken ActionBarContainer drawable handling on
+				// pre-API 17 builds
+				// https://github.com/android/platform_frameworks_base/commit/a7cc06d82e45918c37429a59b14545c6a57db4e4
+				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+					td.setCallback(drawableCallback);
+				} else {
+					getActionBar().setBackgroundDrawable(td);
+				}
+
+				td.startTransition(200);
+
+			}
+
+			oldBackground = ld;
+
+			// http://stackoverflow.com/questions/11002691/actionbar-setbackgrounddrawable-nulling-background-from-thread-handler
+			getActionBar().setDisplayShowTitleEnabled(false);
+			getActionBar().setDisplayShowTitleEnabled(true);
+
+		}
+
+		currentColor = newColor;
+
 	}
 
 	@Override
@@ -100,24 +174,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public void onTabSelected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
-		// When the given tab is selected, switch to the corresponding page in
-		// the ViewPager.
-		mViewPager.setCurrentItem(tab.getPosition());
-	}
-
-	@Override
-	public void onTabUnselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
-	}
-
-	@Override
-	public void onTabReselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
 	}
 
 	/**
@@ -164,6 +220,12 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 			}
 			return null;
 		}
+	}
+
+	@Override
+	public void onNavigationDrawerItemSelected(int position) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
