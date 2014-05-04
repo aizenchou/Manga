@@ -48,5 +48,16 @@
     
     <string name="itemdeleted">取消喜欢</string>
     <string name="taptoundo">点击返回</string>
+    
+    <string-array name="navigation_label_array">
+        <item>首   页</item>
+        <item>分   类</item>
+        <item>用   户</item>
+        <item>关   于</item>
+    </string-array>
+    
+    <string name="status_text_loading">努力加载中</string>
+    <string name="status_text_wrong">出错啦 QAQ</string>
+    <string name="status_text_timeout">网络没连？</string>
 
 </resources>

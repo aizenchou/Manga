@@ -9,10 +9,11 @@ package com.aizen.manga;
 
 public final class R {
     public static final class array {
-        public static final int pref_example_list_titles=0x7f080000;
-        public static final int pref_example_list_values=0x7f080001;
-        public static final int pref_sync_frequency_titles=0x7f080002;
-        public static final int pref_sync_frequency_values=0x7f080003;
+        public static final int navigation_label_array=0x7f080000;
+        public static final int pref_example_list_titles=0x7f080001;
+        public static final int pref_example_list_values=0x7f080002;
+        public static final int pref_sync_frequency_titles=0x7f080003;
+        public static final int pref_sync_frequency_values=0x7f080004;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -136,6 +137,7 @@ containing a value of this type.
     }
     public static final class dimen {
         public static final int ActionBarTitleSize=0x7f06000b;
+        public static final int NavigationPadding=0x7f06000c;
         /**  Default screen margins, per the Android Design guidelines. 
 
          Example customization of dimensions originally defined in res/values/dimens.xml
@@ -178,87 +180,94 @@ containing a value of this type.
         public static final int ic_beer=0x7f020011;
         public static final int ic_drawer=0x7f020012;
         public static final int ic_github=0x7f020013;
-        public static final int ic_launcher=0x7f020014;
-        public static final int ic_undo=0x7f020015;
-        public static final int img_nature1=0x7f020016;
-        public static final int img_nature2=0x7f020017;
-        public static final int img_nature3=0x7f020018;
-        public static final int img_nature4=0x7f020019;
-        public static final int img_nature5=0x7f02001a;
-        public static final int tabs_pattern=0x7f02001b;
-        public static final int tabs_pattern_diagonal=0x7f02001c;
-        public static final int tile=0x7f02001d;
-        public static final int xlistview_arrow=0x7f02001e;
+        public static final int ic_home_color_20=0x7f020014;
+        public static final int ic_launcher=0x7f020015;
+        public static final int ic_person_darkgrey_20=0x7f020016;
+        public static final int ic_undo=0x7f020017;
+        public static final int img_nature1=0x7f020018;
+        public static final int img_nature2=0x7f020019;
+        public static final int img_nature3=0x7f02001a;
+        public static final int img_nature4=0x7f02001b;
+        public static final int img_nature5=0x7f02001c;
+        public static final int loading=0x7f02001d;
+        public static final int tabs_pattern=0x7f02001e;
+        public static final int tabs_pattern_diagonal=0x7f02001f;
+        public static final int tile=0x7f020020;
+        public static final int timeout=0x7f020021;
+        public static final int wrong=0x7f020022;
+        public static final int xlistview_arrow=0x7f020023;
     }
     public static final class id {
-        public static final int AboutLabel=0x7f0b001f;
-        public static final int HomeLabel=0x7f0b001c;
-        public static final int ResultAuthor=0x7f0b0030;
-        public static final int ResultCover=0x7f0b002e;
-        public static final int ResultDesc=0x7f0b0035;
-        public static final int ResultName=0x7f0b002f;
-        public static final int ResultRating=0x7f0b0033;
-        public static final int ResultShowDesc=0x7f0b0034;
-        public static final int ResultStatus=0x7f0b0031;
-        public static final int ResultType=0x7f0b0032;
-        public static final int SearchResultActivity=0x7f0b0009;
+        public static final int LabelIcon=0x7f0b002f;
+        public static final int LabelText=0x7f0b002e;
+        public static final int NavigationLabels=0x7f0b001f;
+        public static final int ReadDataStatusLayout=0x7f0b0005;
+        public static final int ResultAuthor=0x7f0b0032;
+        public static final int ResultCover=0x7f0b0030;
+        public static final int ResultDesc=0x7f0b0037;
+        public static final int ResultName=0x7f0b0031;
+        public static final int ResultRating=0x7f0b0035;
+        public static final int ResultShowDesc=0x7f0b0036;
+        public static final int ResultStatus=0x7f0b0033;
+        public static final int ResultType=0x7f0b0034;
+        public static final int SearchResultActivity=0x7f0b000c;
         public static final int SearchResultFrag=0x7f0b0020;
         public static final int SearchResultList=0x7f0b0021;
-        public static final int TypesLabel=0x7f0b001d;
-        public static final int UserAvatar=0x7f0b0019;
-        public static final int UserID=0x7f0b001b;
-        public static final int UserInfo=0x7f0b0018;
-        public static final int UserLabel=0x7f0b001e;
-        public static final int UserName=0x7f0b001a;
-        public static final int action_settings=0x7f0b0041;
-        public static final int clear_cache=0x7f0b0043;
+        public static final int StatusImage=0x7f0b0006;
+        public static final int StatusText=0x7f0b0007;
+        public static final int UserAvatar=0x7f0b001c;
+        public static final int UserID=0x7f0b001e;
+        public static final int UserInfo=0x7f0b001b;
+        public static final int UserName=0x7f0b001d;
+        public static final int action_settings=0x7f0b0043;
+        public static final int clear_cache=0x7f0b0045;
         public static final int container=0x7f0b0001;
         public static final int detailpager=0x7f0b0000;
         public static final int drawer_layout=0x7f0b0002;
-        public static final int dummy_button=0x7f0b0008;
-        public static final int fullscreen_content_controls=0x7f0b0007;
+        public static final int dummy_button=0x7f0b000b;
+        public static final int fullscreen_content_controls=0x7f0b000a;
         public static final int imageView=0x7f0b0023;
-        public static final int imagepager=0x7f0b0006;
+        public static final int imagepager=0x7f0b0009;
         public static final int lastRead=0x7f0b002d;
-        public static final int main_navigation_drawer=0x7f0b0005;
+        public static final int main_navigation_drawer=0x7f0b0008;
         public static final int mangaCover=0x7f0b0024;
-        public static final int mangaList=0x7f0b0017;
+        public static final int mangaList=0x7f0b001a;
         public static final int mangaMark=0x7f0b0029;
         public static final int mangaName=0x7f0b0025;
         public static final int mangaStatus=0x7f0b0026;
         public static final int mangaUpdateDate=0x7f0b0027;
         public static final int mangaUpdateTo=0x7f0b0028;
-        public static final int mangainfo_author=0x7f0b000f;
+        public static final int mangainfo_author=0x7f0b0012;
         public static final int mangainfo_chapter_name=0x7f0b0022;
-        public static final int mangainfo_chaptergrid=0x7f0b0016;
-        public static final int mangainfo_cover=0x7f0b000c;
-        public static final int mangainfo_desc=0x7f0b000d;
-        public static final int mangainfo_download_btn=0x7f0b0013;
-        public static final int mangainfo_favor_btn=0x7f0b0012;
-        public static final int mangainfo_lastRead=0x7f0b0011;
-        public static final int mangainfo_name=0x7f0b000e;
-        public static final int mangainfo_share_btn=0x7f0b0014;
-        public static final int mangainfo_status=0x7f0b0010;
+        public static final int mangainfo_chaptergrid=0x7f0b0019;
+        public static final int mangainfo_cover=0x7f0b000f;
+        public static final int mangainfo_desc=0x7f0b0010;
+        public static final int mangainfo_download_btn=0x7f0b0016;
+        public static final int mangainfo_favor_btn=0x7f0b0015;
+        public static final int mangainfo_lastRead=0x7f0b0014;
+        public static final int mangainfo_name=0x7f0b0011;
+        public static final int mangainfo_share_btn=0x7f0b0017;
+        public static final int mangainfo_status=0x7f0b0013;
         public static final int myFavorCover=0x7f0b002a;
         public static final int myFavorName=0x7f0b002b;
         public static final int myFavorStatus=0x7f0b002c;
-        public static final int noticeText=0x7f0b0015;
+        public static final int noticeText=0x7f0b0018;
         public static final int pager=0x7f0b0004;
-        public static final int scrollView1=0x7f0b000b;
-        public static final int searchManga=0x7f0b0042;
-        public static final int section_label=0x7f0b000a;
+        public static final int scrollView1=0x7f0b000e;
+        public static final int searchManga=0x7f0b0044;
+        public static final int section_label=0x7f0b000d;
         public static final int tabs=0x7f0b0003;
-        public static final int undo_row_texttv=0x7f0b0036;
-        public static final int undo_row_undobutton=0x7f0b0037;
-        public static final int xlistview_footer_content=0x7f0b0038;
-        public static final int xlistview_footer_hint_textview=0x7f0b003a;
-        public static final int xlistview_footer_progressbar=0x7f0b0039;
-        public static final int xlistview_header_arrow=0x7f0b003f;
-        public static final int xlistview_header_content=0x7f0b003b;
-        public static final int xlistview_header_hint_textview=0x7f0b003d;
-        public static final int xlistview_header_progressbar=0x7f0b0040;
-        public static final int xlistview_header_text=0x7f0b003c;
-        public static final int xlistview_header_time=0x7f0b003e;
+        public static final int undo_row_texttv=0x7f0b0038;
+        public static final int undo_row_undobutton=0x7f0b0039;
+        public static final int xlistview_footer_content=0x7f0b003a;
+        public static final int xlistview_footer_hint_textview=0x7f0b003c;
+        public static final int xlistview_footer_progressbar=0x7f0b003b;
+        public static final int xlistview_header_arrow=0x7f0b0041;
+        public static final int xlistview_header_content=0x7f0b003d;
+        public static final int xlistview_header_hint_textview=0x7f0b003f;
+        public static final int xlistview_header_progressbar=0x7f0b0042;
+        public static final int xlistview_header_text=0x7f0b003e;
+        public static final int xlistview_header_time=0x7f0b0040;
     }
     public static final class layout {
         public static final int activity_detail=0x7f030000;
@@ -277,10 +286,11 @@ containing a value of this type.
         public static final int image_detail_fragment=0x7f03000d;
         public static final int listview_mangalist=0x7f03000e;
         public static final int listview_myfavorlist=0x7f03000f;
-        public static final int listview_searchresultlist=0x7f030010;
-        public static final int undo_row=0x7f030011;
-        public static final int xlistview_footer=0x7f030012;
-        public static final int xlistview_header=0x7f030013;
+        public static final int listview_navigationlist=0x7f030010;
+        public static final int listview_searchresultlist=0x7f030011;
+        public static final int undo_row=0x7f030012;
+        public static final int xlistview_footer=0x7f030013;
+        public static final int xlistview_header=0x7f030014;
     }
     public static final class menu {
         public static final int detail=0x7f0a0000;
@@ -312,37 +322,40 @@ containing a value of this type.
         public static final int navigation_drawer_open=0x7f07000c;
         public static final int no_network_connection_toast=0x7f070025;
         public static final int notice=0x7f070014;
-        public static final int pref_default_display_name=0x7f07002d;
-        public static final int pref_description_social_recommendations=0x7f07002b;
+        public static final int pref_default_display_name=0x7f070030;
+        public static final int pref_description_social_recommendations=0x7f07002e;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f07002f;
+        public static final int pref_header_data_sync=0x7f070032;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f070029;
+        public static final int pref_header_general=0x7f07002c;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f070032;
-        public static final int pref_ringtone_silent=0x7f070035;
-        public static final int pref_title_add_friends_to_messages=0x7f07002e;
-        public static final int pref_title_display_name=0x7f07002c;
-        public static final int pref_title_new_message_notifications=0x7f070033;
-        public static final int pref_title_ringtone=0x7f070034;
-        public static final int pref_title_social_recommendations=0x7f07002a;
-        public static final int pref_title_sync_frequency=0x7f070030;
-        public static final int pref_title_system_sync_settings=0x7f070031;
-        public static final int pref_title_vibrate=0x7f070036;
+        public static final int pref_header_notifications=0x7f070035;
+        public static final int pref_ringtone_silent=0x7f070038;
+        public static final int pref_title_add_friends_to_messages=0x7f070031;
+        public static final int pref_title_display_name=0x7f07002f;
+        public static final int pref_title_new_message_notifications=0x7f070036;
+        public static final int pref_title_ringtone=0x7f070037;
+        public static final int pref_title_social_recommendations=0x7f07002d;
+        public static final int pref_title_sync_frequency=0x7f070033;
+        public static final int pref_title_system_sync_settings=0x7f070034;
+        public static final int pref_title_vibrate=0x7f070039;
         public static final int rec_tab_title=0x7f070016;
         public static final int recent_manga_list=0x7f070011;
         public static final int search_hint=0x7f070019;
         public static final int search_url=0x7f070013;
+        public static final int status_text_loading=0x7f070028;
+        public static final int status_text_timeout=0x7f07002a;
+        public static final int status_text_wrong=0x7f070029;
         public static final int taptoundo=0x7f070027;
         public static final int title_activity_detail=0x7f070005;
         public static final int title_activity_help=0x7f070009;
         public static final int title_activity_manga=0x7f070006;
         public static final int title_activity_search_result=0x7f07000b;
-        public static final int title_activity_settings=0x7f070028;
+        public static final int title_activity_settings=0x7f07002b;
         public static final int title_section1=0x7f070001;
         public static final int title_section2=0x7f070002;
         public static final int title_section3=0x7f070003;

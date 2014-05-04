@@ -22,7 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.nhaarman.listviewanimations.itemmanipulation.OnDismissCallback;
@@ -40,7 +43,9 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 	private ExecutorService executorService = Executors.newFixedThreadPool(10);
 	private String FRAG_STRING_URL;
 	private int page = 1;
-
+	private RelativeLayout statusLayout;
+	private ImageView statusImageView;
+	private TextView statusTextView;
 	// private ProgressDialog dialog;
 
 	private static HotMangaFrag uniqueHotMangaFrag = null;
@@ -110,6 +115,9 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		statusLayout = (RelativeLayout) getActivity().findViewById(R.id.ReadDataStatusLayout);
+		statusImageView = (ImageView) getActivity().findViewById(R.id.StatusImage);
+		statusTextView = (TextView) getActivity().findViewById(R.id.StatusText);
 	}
 
 	public void refreshHotMangaList(int pagenum) throws Exception {
@@ -124,6 +132,7 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 					// TODO Auto-generated method stub
 					// mangas.add(new Manga("", "naruto", "anben", "9.9",
 					// "none"));
+					statusLayout.setVisibility(View.GONE);
 					mangas.addAll(mangaDataList);
 					mangasAdapter.notifyDataSetChanged();
 					swingBottomInAnimationAdapter.notifyDataSetChanged();
@@ -168,5 +177,11 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 				}
 			}
 		});
+	}
+	
+	public void somethingWrong() {
+		statusImageView.setImageDrawable(getResources().getDrawable(R.drawable.wrong));
+		statusTextView.setText(getResources().getString(R.string.status_text_wrong));
+		statusLayout.setVisibility(View.VISIBLE);
 	}
 }

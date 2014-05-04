@@ -21,6 +21,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,7 +31,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 public class MainActivity extends Activity implements NavigationDrawerCallbacks {
 
@@ -50,6 +57,9 @@ public class MainActivity extends Activity implements NavigationDrawerCallbacks 
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 
 	private PagerSlidingTabStrip tabs;
+	private RelativeLayout statusLayout;
+	private ImageView statusImageView;
+	private TextView statusTextView;
 	private Drawable oldBackground = null;
 	private int currentColor;
 	private final Handler handler = new Handler();
@@ -57,6 +67,15 @@ public class MainActivity extends Activity implements NavigationDrawerCallbacks 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		initPager();
+		if (!isNetworkConnected(this)) {
+			statusImageView.setImageDrawable(getResources().getDrawable(R.drawable.timeout));
+			statusTextView.setText(getResources().getString(R.string.status_text_timeout));
+			mViewPager.setVisibility(View.GONE);
+		}
+	}
+
+	private void initPager() {
 		setContentView(R.layout.activity_main);
 		currentColor = getResources().getColor(R.color.ActionBarBlue);
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
@@ -65,7 +84,9 @@ public class MainActivity extends Activity implements NavigationDrawerCallbacks 
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 		// Set up the action bar.
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-
+		statusLayout = (RelativeLayout) findViewById(R.id.ReadDataStatusLayout);
+		statusImageView = (ImageView) findViewById(R.id.StatusImage);
+		statusTextView = (TextView) findViewById(R.id.StatusText);
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
@@ -80,7 +101,7 @@ public class MainActivity extends Activity implements NavigationDrawerCallbacks 
 		tabs.setViewPager(mViewPager);
 		changeColor(currentColor);
 	}
-
+	
 	private Drawable.Callback drawableCallback = new Drawable.Callback() {
 		@Override
 		public void invalidateDrawable(Drawable who) {
@@ -97,6 +118,19 @@ public class MainActivity extends Activity implements NavigationDrawerCallbacks 
 			handler.removeCallbacks(what);
 		}
 	};
+
+	public boolean isNetworkConnected(Context context) {
+		if (context != null) {
+			ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo mNetworkInfo = mConnectivityManager
+					.getActiveNetworkInfo();
+			if (mNetworkInfo != null) {
+				return mNetworkInfo.isAvailable();
+			}
+		}
+		return false;
+	}
 
 	private void changeColor(int newColor) {
 

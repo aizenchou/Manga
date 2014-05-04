@@ -15,14 +15,48 @@
             android:layout_height="48dip"
             android:background="@drawable/background_tabs" />
 
-        <android.support.v4.view.ViewPager
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/pager"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="com.aizen.manga.MainActivity" >
-        </android.support.v4.view.ViewPager>
+            android:layout_height="wrap_content" >
+
+            <android.support.v4.view.ViewPager
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.aizen.manga.MainActivity" >
+            </android.support.v4.view.ViewPager>
+
+            <RelativeLayout
+                android:id="@+id/ReadDataStatusLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@color/CardFragBackground" >
+
+                <ImageView
+                    android:id="@+id/StatusImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/loading" />
+
+                <TextView
+                    android:id="@+id/StatusText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/StatusImage"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/status_text_loading"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </RelativeLayout>
+            
+        </RelativeLayout>
         
     </LinearLayout>
 

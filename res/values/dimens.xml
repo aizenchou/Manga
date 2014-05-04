@@ -18,5 +18,7 @@
     <dimen name="vertical_page_margin">@dimen/margin_medium</dimen>
     
     <dimen name="ActionBarTitleSize">20sp</dimen>
+    
+    <dimen name="NavigationPadding">16dp</dimen>
 
 </resources>

@@ -3,6 +3,8 @@ package com.aizen.manga.fragment;
 import java.util.ArrayList;
 
 import com.aizen.manga.R;
+import com.aizen.manga.adapter.NavigationDrawerListAdapter;
+import com.aizen.manga.module.Label;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -21,6 +23,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -35,11 +39,12 @@ public class NavigationDrawerFragment extends Fragment {
 	private ActionBarDrawerToggle mDrawerToggle;
 
 	private DrawerLayout mDrawerLayout;
-	private ArrayList<TextView> mNavigationViewGroup = new ArrayList<>();
-	private TextView HomeLabel, TypesLabel, UserLabel, AboutLabel;
+	private ListView mDrawerListView;
+	private ArrayList<Label> labelDatas = new ArrayList<>();
+	private NavigationDrawerListAdapter mNavigationDrawerListAdapter;
 	private View mFragmentContainerView;
 
-	private int mCurrentSelectedPosition = R.id.HomeLabel;
+	private int mCurrentSelectedPosition = 0;
 	private boolean mFromSavedInstanceState;
 	private boolean mUserLearnedDrawer;
 
@@ -49,15 +54,15 @@ public class NavigationDrawerFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		SharedPreferences sp = PreferenceManager
-				.getDefaultSharedPreferences(getActivity());
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
 		if (savedInstanceState != null) {
-			mCurrentSelectedPosition = savedInstanceState
-					.getInt(STATE_SELECTED_POSITION);
+			mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
 			mFromSavedInstanceState = true;
 		}
+		
+		selectItem(mCurrentSelectedPosition);
 	}
 
 	@Override
@@ -72,31 +77,22 @@ public class NavigationDrawerFragment extends Fragment {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View rootView = inflater.inflate(R.layout.fragment_navigation_drawer,
 				container, false);
-		HomeLabel = (TextView) rootView.findViewById(R.id.HomeLabel);
-		TypesLabel = (TextView) rootView.findViewById(R.id.TypesLabel);
-		UserLabel = (TextView) rootView.findViewById(R.id.UserLabel);
-		AboutLabel = (TextView) rootView.findViewById(R.id.AboutLabel);
-		mNavigationViewGroup.add(HomeLabel);
-		mNavigationViewGroup.add(TypesLabel);
-		mNavigationViewGroup.add(UserLabel);
-		mNavigationViewGroup.add(AboutLabel);
-		for (TextView label : mNavigationViewGroup) {
-			if (label.getId() == mCurrentSelectedPosition) {
-				label.getPaint().setFakeBoldText(true);
-				label.setTextSize(label.getTextSize() + 5);
-			}
-		}
-
-		for (int i = 0; i < mNavigationViewGroup.size(); i++) {
-			mNavigationViewGroup.get(i).setOnClickListener(
-					new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							// TODO Auto-generated method stub
-							selectItem(v.getId());
-						}
-					});
-		}
+		mDrawerListView = (ListView) rootView.findViewById(R.id.NavigationLabels);
+		int layoutID = R.layout.listview_navigationlist;
+		String[] labelTexts = getResources().getStringArray(R.array.navigation_label_array);
+		labelDatas.add(new Label(labelTexts[0], getResources().getDrawable(R.drawable.ic_action_about)));
+		labelDatas.add(new Label(labelTexts[1], getResources().getDrawable(R.drawable.ic_action_favorite)));
+		labelDatas.add(new Label(labelTexts[2], getResources().getDrawable(R.drawable.ic_action_favorite)));
+		labelDatas.add(new Label(labelTexts[3], getResources().getDrawable(R.drawable.ic_action_favorite)));
+		mNavigationDrawerListAdapter = new NavigationDrawerListAdapter(getActivity(), layoutID, labelDatas);
+        mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectItem(position);
+            }
+        });
+        mDrawerListView.setAdapter(mNavigationDrawerListAdapter);
+        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		return rootView;
 	}
 
@@ -161,18 +157,18 @@ public class NavigationDrawerFragment extends Fragment {
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 	}
 
-	private void selectItem(int viewid) {
-		mCurrentSelectedPosition = viewid;
-		TextView selectedTextView = (TextView) getActivity().findViewById(
-				viewid);
-		selectedTextView.getPaint().setFakeBoldText(true);
-		if (mDrawerLayout != null) {
-			mDrawerLayout.closeDrawer(mFragmentContainerView);
-		}
-		if (mCallbacks != null) {
-			mCallbacks.onNavigationDrawerItemSelected(viewid);
-		}
-	}
+    private void selectItem(int position) {
+        mCurrentSelectedPosition = position;
+        if (mDrawerListView != null) {
+            mDrawerListView.setItemChecked(position, true);
+        }
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(mFragmentContainerView);
+        }
+        if (mCallbacks != null) {
+            mCallbacks.onNavigationDrawerItemSelected(position);
+        }
+    }
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -230,6 +226,6 @@ public class NavigationDrawerFragment extends Fragment {
 
 	public static interface NavigationDrawerCallbacks {
 
-		void onNavigationDrawerItemSelected(int viewid);
+		void onNavigationDrawerItemSelected(int position);
 	}
 }
