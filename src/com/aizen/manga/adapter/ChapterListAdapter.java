@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class ChapterListAdapter extends BaseAdapter {
@@ -29,6 +30,7 @@ public class ChapterListAdapter extends BaseAdapter {
 
 	public final class GridItemView {
 		public TextView chapterName;
+		public CheckBox checkBox;
 	}
 
 	@Override
@@ -59,6 +61,8 @@ public class ChapterListAdapter extends BaseAdapter {
 
 			gridItemView.chapterName = (TextView) convertView
 					.findViewById(R.id.mangainfo_chapter_name);
+			gridItemView.checkBox = (CheckBox) convertView
+					.findViewById(R.id.mangainfo_chapter_select_check);
 
 			convertView.setTag(gridItemView);
 		} else {

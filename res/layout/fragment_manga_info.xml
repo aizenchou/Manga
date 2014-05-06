@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/mangainfo_status"
                 android:layout_below="@+id/mangainfo_status"
-                android:text="TextView"
+                android:text="lastread"
                 android:textColor="@color/TextBlack" />
         </RelativeLayout>
 
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_below="@+id/noticeText"
-                android:numColumns="4" >
+                android:numColumns="3" >
             </com.aizen.manga.view.NoScrollGridView>
         </RelativeLayout>
     </LinearLayout>

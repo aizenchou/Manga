@@ -3,6 +3,7 @@
     <color name="black_overlay">#66000000</color>
     <color name="TextGray">#999999</color>
     <color name="TextBlack">#000000</color>
+    <color name="MangaViewBackGround">#000000</color>
     <color name="CardFragBackground">#e5e5e5</color>
     <color name="TextBlue">#1286C8</color>
     <color name="DrawerGray">#F7F7F7</color>

@@ -49,6 +49,9 @@
     <string name="itemdeleted">取消喜欢</string>
     <string name="taptoundo">点击返回</string>
     
+    <string name="select_all">全选</string>
+    <string name="unselect_all">取消</string>
+    
     <string-array name="navigation_label_array">
         <item>首   页</item>
         <item>分   类</item>

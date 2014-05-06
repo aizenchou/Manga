@@ -1,6 +1,8 @@
 package com.aizen.manga.fragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -18,18 +20,27 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.CheckBox;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MangaInfoFrag extends Fragment {
+public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 
 	public static MangaInfoFrag newInstance(String url) {
 		MangaInfoFrag fragment = new MangaInfoFrag();
@@ -51,6 +62,7 @@ public class MangaInfoFrag extends Fragment {
 	NoScrollGridView chapterGridView;
 	ArrayList<Chapter> chapters = new ArrayList<>();
 	ChapterListAdapter chaptersAdapter;
+	private Map<Integer, Boolean> selectMap = new HashMap<Integer, Boolean>();
 	private ProgressDialog dialog;
 	private MangaDBManager mangadbmgr;
 
@@ -73,14 +85,10 @@ public class MangaInfoFrag extends Fragment {
 		descView = (TextView) rootView.findViewById(R.id.mangainfo_desc);
 		statusView = (TextView) rootView.findViewById(R.id.mangainfo_status);
 		lastReadView = (TextView) rootView.findViewById(R.id.mangainfo_lastRead);
-		chapterGridView = (NoScrollGridView) rootView
-				.findViewById(R.id.mangainfo_chaptergrid);
-		shareBtn = (ImageButton) rootView
-				.findViewById(R.id.mangainfo_share_btn);
-		favorBtn = (ImageButton) rootView
-				.findViewById(R.id.mangainfo_favor_btn);
-		downloadBtn = (ImageButton) rootView
-				.findViewById(R.id.mangainfo_download_btn);
+		chapterGridView = (NoScrollGridView) rootView.findViewById(R.id.mangainfo_chaptergrid);		
+		shareBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_share_btn);
+		favorBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_favor_btn);
+		downloadBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_download_btn);
 		// refreshBtn = (ImageButton)
 		// rootView.findViewById(R.id.mangainfo_refresh_btn);
 		chapterGridView.setOnItemClickListener(new OnItemClickListener() {
@@ -102,6 +110,9 @@ public class MangaInfoFrag extends Fragment {
 				});
 			}
 		});
+		chapterGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
+		chapterGridView.setMultiChoiceModeListener(this);
+		
 		int layoutID = R.layout.gridview_mangachapter;
 		chaptersAdapter = new ChapterListAdapter(getActivity(), chapters,
 				layoutID);
@@ -218,5 +229,61 @@ public class MangaInfoFrag extends Fragment {
 			}
 		});
 	}
+
+	@Override
+	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+		// TODO Auto-generated method stub
+		MenuInflater inflater = mode.getMenuInflater();
+		inflater.inflate(R.menu.chapter_choice, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.chapter_selectall:
+			for (int i = 0; i < chapterGridView.getCount(); i++) {
+				chapterGridView.setItemChecked(i, true);
+				selectMap.put(i, true);
+			}
+			break;
+
+		case R.id.chapter_unselectall:
+			for (int i = 0; i < chapterGridView.getCount(); i++) {
+				chapterGridView.setItemChecked(i, false);
+			}
+			selectMap.clear();
+			break;
+		}
+		return false;
+	}
+
+	@Override
+	public void onDestroyActionMode(ActionMode mode) {
+		// TODO Auto-generated method stub
+		chaptersAdapter.notifyDataSetChanged();
+		
+	}
+
+	@Override
+	public void onItemCheckedStateChanged(ActionMode mode, int position,
+			long id, boolean checked) {
+		// TODO Auto-generated method stub
+		RelativeLayout itemLayout = (RelativeLayout) chapterGridView.getChildAt(position);
+		CheckBox checkBox = (CheckBox) itemLayout.findViewById(R.id.mangainfo_chapter_select_check);
+		checkBox.setChecked(checked);
+		selectMap.put(position, checked);
+		checkBox.setVisibility(checked?View.VISIBLE:View.GONE);
+		mode.invalidate();
+	}
+	
+	
 
 }
