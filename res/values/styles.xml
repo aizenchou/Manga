@@ -22,7 +22,7 @@
     </style>
 
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/ActionBarBlue</item>
+        <item name="android:background">@color/ActionBarDeepBlue</item>
         <item name="android:drawableBottom">@drawable/actionbar_bottom</item>
         <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
     </style>

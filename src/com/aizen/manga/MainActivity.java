@@ -77,7 +77,7 @@ public class MainActivity extends Activity implements NavigationDrawerCallbacks 
 
 	private void initPager() {
 		setContentView(R.layout.activity_main);
-		currentColor = getResources().getColor(R.color.ActionBarBlue);
+		currentColor = getResources().getColor(R.color.ActionBarDeepBlue);
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.main_navigation_drawer);
 		mNavigationDrawerFragment.setUp(R.id.main_navigation_drawer,

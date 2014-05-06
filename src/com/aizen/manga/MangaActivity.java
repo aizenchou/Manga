@@ -93,7 +93,7 @@ public class MangaActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_manga);
 
-	//	imageurls.add("http://i3.manhuadao.com/bcover/2012/12/261757398_h.jpg");
+		imageurls.add("http://i3.manhuadao.com/bcover/2012/12/261757398_h.jpg");
 	//	imageurls
 	//			.add("http://cartoon.jide123.cc:8080/manhuatuku/1835/2014417171542670.jpg");
 	//	imageurls

@@ -32,7 +32,7 @@ public class SearchResultActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_result);
-		currentColor = getResources().getColor(R.color.ActionBarBlue);
+		currentColor = getResources().getColor(R.color.ActionBarDeepBlue);
 		handleIntent(getIntent());
 
 		if (savedInstanceState == null) {

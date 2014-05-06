@@ -8,7 +8,11 @@
     <color name="DrawerGray">#F7F7F7</color>
     <color name="DrawerWhite">#FFFFFF</color>
     <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="RatingBarDeepBlue">#FF233958</color>
     <color name="ActionBarBlue">#FF3F9FE0</color>
+    <color name="ActionBarDeepBlue">#FF18273C</color>
+    <color name="ActionBarBlackGreen">#FF1E5B2B</color>
+    <color name="ActionBarWineRed">#FF5B342B</color>
     <color name="ActionBarHintWhite">#AAFFFFFF</color>
     <color name="ActionBarTitleWhite">#FFFFFFFF</color>
 
