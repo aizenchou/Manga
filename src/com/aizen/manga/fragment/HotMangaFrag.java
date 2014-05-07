@@ -106,6 +106,7 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 					refreshHotMangaList(page);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
+					somethingWrong();
 					e.printStackTrace();
 				}
 			}
@@ -141,6 +142,7 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			somethingWrong();
 			e.printStackTrace();
 		}
 	}
@@ -174,6 +176,7 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					somethingWrong();
 				}
 			}
 		});

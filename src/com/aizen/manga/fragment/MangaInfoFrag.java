@@ -15,10 +15,15 @@ import com.aizen.manga.sql.MangaDBManager;
 import com.aizen.manga.util.NetAnalyse;
 import com.aizen.manga.view.NoScrollGridView;
 
+import android.app.DownloadManager;
+import android.app.DownloadManager.Request;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -65,11 +70,15 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 	private Map<Integer, Boolean> selectMap = new HashMap<Integer, Boolean>();
 	private ProgressDialog dialog;
 	private MangaDBManager mangadbmgr;
+	
+	private String serviceString = Context.DOWNLOAD_SERVICE;
+	private DownloadManager downloadManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mangadbmgr = new MangaDBManager(getActivity());
+		downloadManager = (DownloadManager) getActivity().getSystemService(serviceString);
 	}
 
 	@Override
@@ -152,6 +161,14 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 
 			}
 		});
+		downloadBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				downloadSelectChapters();
+			}
+		});
 		descView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -166,7 +183,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 		});
 		return rootView;
 	}
-
+	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -269,7 +286,6 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 	public void onDestroyActionMode(ActionMode mode) {
 		// TODO Auto-generated method stub
 		chaptersAdapter.notifyDataSetChanged();
-		
 	}
 
 	@Override
@@ -284,6 +300,39 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 		mode.invalidate();
 	}
 	
-	
-
+	private void downloadSelectChapters() {
+		for (final Integer position : selectMap.keySet()) {
+			if (selectMap.get(position)) {
+				System.out.println(position);
+				executorService.submit(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						final String chapterURL = getString(R.string.domain)+chapters.get(position).getLink();
+						final String chapterName = chapters.get(position).getTitle();
+						System.out.println(chapterURL);
+						final ArrayList<String> pageUrls = NetAnalyse.parseHtmlToPageURLs(chapterURL);
+						final ArrayList<Long> references = new ArrayList<>();
+						handler.post(new Runnable() {
+							
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								for (String pageurl : pageUrls) {
+									System.out.println(pageurl);
+									String pagename = pageurl.substring(pageurl.lastIndexOf("/"));
+									DownloadManager.Request request = new Request(Uri.parse(pageurl));
+									request.addRequestHeader("Referer", url.equals("")?"http://www.imanhua.com/comic/76/list_59262.html":url);
+									request.addRequestHeader("User-Agent", "UserAgent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36");
+									request.addRequestHeader("Proxy-Connection", "Keep-Alive");
+									request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, mangaDetail.getId()+"/"+chapterName+"/"+pagename);
+									references.add(downloadManager.enqueue(request));
+								}
+							}
+						});
+					}
+				});
+			}
+		}
+	}
 }

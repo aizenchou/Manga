@@ -25,6 +25,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -38,7 +41,10 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 	private ExecutorService executorService = Executors.newFixedThreadPool(10);
 	private String FRAG_STRING_URL;
 	private int page = 1;
-
+	private RelativeLayout statusLayout;
+	private ImageView statusImageView;
+	private TextView statusTextView;
+	
 	// private ProgressDialog dialog;
 
 	private static RecentMangaFrag uniqueRecentMangaFrag = null;
@@ -96,6 +102,7 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 					refreshRecMangaList(page);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
+					somethingWrong();
 					e.printStackTrace();
 				}
 			}
@@ -105,6 +112,9 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		statusLayout = (RelativeLayout) getActivity().findViewById(R.id.ReadDataStatusLayout);
+		statusImageView = (ImageView) getActivity().findViewById(R.id.StatusImage);
+		statusTextView = (TextView) getActivity().findViewById(R.id.StatusText);
 	}
 
 	public void refreshRecMangaList(int pagenum) throws Exception {
@@ -117,6 +127,7 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
+					statusLayout.setVisibility(View.GONE);
 					mangas.addAll(mangaDataList);
 					mangasAdapter.notifyDataSetChanged();
 					swingBottomInAnimationAdapter.notifyDataSetChanged();
@@ -125,6 +136,7 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			somethingWrong();
 			e.printStackTrace();
 		}
 	}
@@ -158,8 +170,15 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					somethingWrong();
 				}
 			}
 		});
+	}
+	
+	public void somethingWrong() {
+		statusImageView.setImageDrawable(getResources().getDrawable(R.drawable.wrong));
+		statusTextView.setText(getResources().getString(R.string.status_text_wrong));
+		statusLayout.setVisibility(View.VISIBLE);
 	}
 }

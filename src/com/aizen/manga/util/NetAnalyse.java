@@ -209,9 +209,6 @@ public class NetAnalyse {
 		Matcher matcher = pattern.matcher(dataresult);
 		while (matcher.find())
 			matchStrings.add(prefix + matcher.group(groupnum) + postfix);
-		for (String string : matchStrings) {
-			System.out.println(string);
-		}
 		return matchStrings;
 	}
 
