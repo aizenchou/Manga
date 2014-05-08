@@ -84,7 +84,7 @@ public class MyFavorListAdapter extends BaseAdapter{
 		listItemView.myFavorStatus.setText(myFavorListItems.get(position).getStatusIntro());
 		String lastReadText = myFavorListItems.get(position).getLastRead();
 		if (lastReadText == null) {
-			listItemView.lastRead.setText("漫画进度：还没开始看");
+			listItemView.lastRead.setText("未看");
 		}else {
 			listItemView.lastRead.setText("上次看到："+myFavorListItems.get(position).getLastRead());
 		}

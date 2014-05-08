@@ -100,6 +100,17 @@ public abstract class ImageWorker {
             //END_INCLUDE(execute_background_task)
         }
     }
+    
+    /**
+     * Load a local image into an ImageView (override
+     * {@link ImageWorker#processBitmap(Object)} to define the processing logic). 
+     * 
+     * @param imageURI The URI of the local image to load.
+     * @param imageView The ImageView to bind the image to.
+     */
+    public void loadLocalImage(String imageURI, ImageView imageView) {
+        imageView.setImageBitmap(BitmapFactory.decodeFile(imageURI));
+    }
 
     /**
      * Set placeholder bitmap that shows when the the background thread is running.

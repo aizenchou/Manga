@@ -16,51 +16,45 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="manga_cover_description">漫画封面</string>
-    
-    
     <string name="domain">http://www.manhuadao.com</string>
     <string name="hot_manga_list">http://www.manhuadao.com/list/view</string>
     <string name="recent_manga_list">http://www.manhuadao.com/list/update</string>
     <string name="host_url">http://www.manhuadao.com</string>
     <string name="search_url">http://www.manhuadao.com/search/q_</string>
-    
-    
     <string name="notice">“卷”为漫画单行本，“话”为杂志上的连载，“卷”包含了以往杂志上所有发行的“话”，故以下“卷”与“话”之间并没有缺少章节！</string>
     <string name="hot_tab_title">热门漫画</string>
     <string name="rec_tab_title">最近更新</string>
     <string name="fav_tab_title">我喜欢的</string>
+    <string name="loc_tab_title">本地漫画</string>
     <string name="action_search_title">漫画搜索</string>
     <string name="search_hint">输入想搜索的漫画的名字..</string>
     <string name="load_dialog_title">正在加载..</string>
     <string name="load_dialog_content">请稍等，马上就好。</string>
-    
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>
     <string name="xlistview_header_hint_loading">正在加载..</string>
     <string name="xlistview_header_last_time">上次更新时间：</string>
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
-
     <string name="clear_cache_menu">清除缓存</string>
     <string name="clear_cache_complete_toast">缓存已清除</string>
     <string name="imageview_description">图片缩略图</string>
     <string name="no_network_connection_toast">无网络连接</string>
-    
     <string name="itemdeleted">取消喜欢</string>
     <string name="taptoundo">点击返回</string>
-    
     <string name="select_all">全选</string>
     <string name="unselect_all">取消</string>
-    
+
     <string-array name="navigation_label_array">
         <item>首   页</item>
         <item>分   类</item>
         <item>用   户</item>
         <item>关   于</item>
     </string-array>
-    
+
     <string name="status_text_loading">努力加载中</string>
     <string name="status_text_wrong">出错啦 QAQ</string>
     <string name="status_text_timeout">网络没连？</string>
+    <string name="title_activity_local_manga_info">LocalMangaInfoActivity</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.aizen.manga.fragment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ import com.aizen.manga.module.Chapter;
 import com.aizen.manga.module.Manga;
 import com.aizen.manga.sql.MangaDBManager;
 import com.aizen.manga.util.NetAnalyse;
+import com.aizen.manga.util.Utils;
 import com.aizen.manga.view.NoScrollGridView;
 
 import android.app.DownloadManager;
@@ -212,7 +214,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 					authorView.setText(mangainfo.getAuthor());
 					System.out.println(mangainfo.getAuthor());
 					statusView.setText(mangainfo.getStatusIntro());
-					lastReadView.setText(mangainfo.getLastRead() == null?"漫画进度：还没开始看":"上次看到："+mangainfo.getLastRead());
+					lastReadView.setText(mangainfo.getLastRead() == null?"未看":"上次看到："+mangainfo.getLastRead());
 					descView.setText(mangainfo.getDescription().length() > 60 ? mangainfo
 							.getDescription().substring(0, 60) + "..."
 							: mangainfo.getDescription());
@@ -320,12 +322,16 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 								// TODO Auto-generated method stub
 								for (String pageurl : pageUrls) {
 									System.out.println(pageurl);
-									String pagename = pageurl.substring(pageurl.lastIndexOf("/"));
+									String pagename = pageurl.substring(pageurl.lastIndexOf("/")+1);
 									DownloadManager.Request request = new Request(Uri.parse(pageurl));
 									request.addRequestHeader("Referer", url.equals("")?"http://www.imanhua.com/comic/76/list_59262.html":url);
 									request.addRequestHeader("User-Agent", "UserAgent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36");
 									request.addRequestHeader("Proxy-Connection", "Keep-Alive");
-									request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, mangaDetail.getId()+"/"+chapterName+"/"+pagename);
+									if (Utils.hasSDCard()) {
+										request.setDestinationInExternalFilesDir(getActivity(), Environment.DIRECTORY_DOWNLOADS+"/"+mangaDetail.getId()+"/"+chapterName+"/", pagename);
+									} else {
+										request.setDestinationUri(Uri.fromFile(new File(getActivity().getFilesDir().getAbsolutePath()+"/"+mangaDetail.getId()+"/aabbbbbb.gif")));
+									}
 									references.add(downloadManager.enqueue(request));
 								}
 							}
@@ -334,5 +340,6 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 				});
 			}
 		}
+		mangadbmgr.addLocal(mangaDetail);
 	}
 }

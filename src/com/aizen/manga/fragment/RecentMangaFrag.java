@@ -127,7 +127,6 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					statusLayout.setVisibility(View.GONE);
 					mangas.addAll(mangaDataList);
 					mangasAdapter.notifyDataSetChanged();
 					swingBottomInAnimationAdapter.notifyDataSetChanged();

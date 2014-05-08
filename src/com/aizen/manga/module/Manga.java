@@ -25,6 +25,7 @@ public class Manga {
 	private boolean isLike;
 	private ArrayList<Chapter> chapters;
 	private String lastRead;
+	private int downloadCount;
 
 	public Manga(String id, String name, String author, String publishDate,
 			String updateDate, String lcoation, String tag, String otherName,
@@ -234,6 +235,14 @@ public class Manga {
 
 	public void setLastRead(String lastRead) {
 		this.lastRead = lastRead;
+	}
+
+	public int getDownloadCount() {
+		return downloadCount;
+	}
+
+	public void setDownloadCount(int downloadCount) {
+		this.downloadCount = downloadCount;
 	}
 
 }

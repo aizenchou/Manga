@@ -1,10 +1,14 @@
 package com.aizen.manga;
 
+import java.io.File;
+
 import com.aizen.manga.fragment.HotMangaFrag;
+import com.aizen.manga.fragment.LocalMangaFrag;
 import com.aizen.manga.fragment.MyMangaFrag;
 import com.aizen.manga.fragment.NavigationDrawerFragment;
 import com.aizen.manga.fragment.NavigationDrawerFragment.NavigationDrawerCallbacks;
 import com.aizen.manga.fragment.RecentMangaFrag;
+import com.aizen.manga.util.Utils;
 import com.astuetz.PagerSlidingTabStrip;
 import com.aizen.manga.R;
 
@@ -23,8 +27,10 @@ import android.graphics.drawable.TransitionDrawable;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -67,6 +73,7 @@ public class MainActivity extends Activity implements NavigationDrawerCallbacks 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		initValue();
 		initPager();
 		if (!isNetworkConnected(this)) {
 			statusImageView.setImageDrawable(getResources().getDrawable(R.drawable.timeout));
@@ -75,6 +82,19 @@ public class MainActivity extends Activity implements NavigationDrawerCallbacks 
 		}
 	}
 
+	private void initValue() {
+		if (Utils.hasSDCard()) {
+			LocalMangaFrag.loadLocalMangaDir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+			System.out.println(LocalMangaFrag.loadLocalMangaDir);
+			//System.out.println(Environment.DIRECTORY_DOWNLOADS);
+			//request.setDestinationInExternalPublicDir(getActivity().getFilesDir().getAbsolutePath()+"/"+mangaDetail.getId()+"/"+chapterName+"/", pagename);
+			//System.out.println(getActivity().getFilesDir().getAbsolutePath()+"/"+mangaDetail.getId()+"/"+chapterName+"/");
+		} else {
+			LocalMangaFrag.loadLocalMangaDir = getFilesDir().getAbsolutePath();
+			//request.setDestinationUri(Uri.fromFile(new File(getActivity().getFilesDir().getAbsolutePath()+"/"+mangaDetail.getId()+"/aabbbbbb.gif")));
+		}
+	}
+	
 	private void initPager() {
 		setContentView(R.layout.activity_main);
 		currentColor = getResources().getColor(R.color.ActionBarDeepBlue);
@@ -232,14 +252,16 @@ public class MainActivity extends Activity implements NavigationDrawerCallbacks 
 				return RecentMangaFrag.newInstance();
 			case 2:
 				return MyMangaFrag.newInstance();
+			case 3:
+				return LocalMangaFrag.newInstance();	
 			}
 			return null;
 		}
 
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
-			return 3;
+			// Show total pages.
+			return 4;
 		}
 
 		@Override
@@ -251,6 +273,8 @@ public class MainActivity extends Activity implements NavigationDrawerCallbacks 
 				return getString(R.string.rec_tab_title);
 			case 2:
 				return getString(R.string.fav_tab_title);
+			case 3:
+				return getString(R.string.loc_tab_title);
 			}
 			return null;
 		}

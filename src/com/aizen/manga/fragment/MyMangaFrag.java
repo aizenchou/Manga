@@ -105,7 +105,7 @@ public class MyMangaFrag extends Fragment implements OnDismissCallback,
 
 	public void getLikedMangaList() {
 		final ArrayList<Manga> queryResult = mangadbmgr.queryLikedMangas();
-		System.out.println(queryResult.size() + "aaaaaaaaaaaaaaaaaaaaa");
+		System.out.println(queryResult.size());
 		handler.post(new Runnable() {
 
 			@Override

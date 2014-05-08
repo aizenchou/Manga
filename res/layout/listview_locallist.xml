@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginTop="2dp"
+    android:background="@drawable/card_background" >
+
+    <TextView
+        android:id="@+id/LocalName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/LocalAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/LocalName"
+        android:layout_below="@+id/LocalName"
+        android:text="author"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/TextGray" />
+
+    <TextView
+        android:id="@+id/LocalDownloadCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/LocalAuthor"
+        android:layout_alignBottom="@+id/LocalAuthor"
+        android:layout_alignParentRight="true"
+        android:text="count"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/TextBlue" />
+
+</RelativeLayout>

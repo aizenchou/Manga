@@ -19,6 +19,7 @@ package com.aizen.manga.util;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
+import android.os.Environment;
 import android.os.StrictMode;
 
 import com.aizen.manga.MangaActivity;;
@@ -29,6 +30,10 @@ import com.aizen.manga.MangaActivity;;
 public class Utils {
     private Utils() {};
 
+    public static boolean hasSDCard() {
+		return Environment.MEDIA_MOUNTED.equals(Environment
+				.getExternalStorageState());
+	}
 
     @TargetApi(VERSION_CODES.HONEYCOMB)
     public static void enableStrictMode() {
