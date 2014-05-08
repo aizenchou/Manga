@@ -14,7 +14,7 @@ public class Manga {
 	private String lcoation;
 	private String tag;
 	private String otherName;
-	private boolean status; //true表示正在连载，false表示已经完结
+	private boolean status; //true琛ㄧず姝ｅ湪杩炶浇锛宖alse琛ㄧず宸茬粡瀹岀粨
 	private String statusIntro;
 	private String description;
 	private String mark;

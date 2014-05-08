@@ -74,13 +74,13 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				// positionÎ»ÖÃ´Ó1¿ªÊ¼ÊÇÒòÎªÎ»ÖÃ0±»headviewÕ¼ÓÃÁË
+				// positionä½ç½®ä»1å¼€å§‹æ˜¯å› ä¸ºä½ç½®0è¢«headviewå ç”¨äº†
 				Intent it = new Intent(getActivity(), DetailActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putString(MangaInfoFrag.MANGA_LINK_STRING, 
 						getActivity().getString(R.string.domain)
 						+ mangas.get(position - 1).getLink());
-				it.putExtras(bundle); // it.putExtra(¡°test¡±, "shuju¡±);
+				it.putExtras(bundle); 
 				startActivity(it);
 				Toast.makeText(getActivity(),
 						mangas.get(position - 1).getLink(), Toast.LENGTH_SHORT)
@@ -92,8 +92,7 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 		swingBottomInAnimationAdapter.setInitialDelayMillis(300);
 		swingBottomInAnimationAdapter.setAbsListView(mangaListView);
 		mangaListView.setAdapter(swingBottomInAnimationAdapter);
-		// dialog = ProgressDialog.show(getActivity(), "Loading",
-		// "ÕıÔÚ¼ÓÔØ¡£¡£¡£¡££¬ÇëÉÔµÈ£¡");
+
 		FRAG_STRING_URL = getActivity().getResources().getString(
 				R.string.hot_manga_list);
 		executorService.submit(new Runnable() {

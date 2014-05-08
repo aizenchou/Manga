@@ -78,7 +78,7 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 				bundle.putString(MangaInfoFrag.MANGA_LINK_STRING, 
 						getActivity().getString(R.string.domain)
 						+ mangas.get(position - 1).getLink());
-				it.putExtras(bundle); // it.putExtra(“test”, "shuju”);
+				it.putExtras(bundle); 
 				startActivity(it);
 				Toast.makeText(getActivity(),
 						mangas.get(position - 1).getLink(), Toast.LENGTH_SHORT)
@@ -90,8 +90,7 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 		swingBottomInAnimationAdapter.setInitialDelayMillis(300);
 		swingBottomInAnimationAdapter.setAbsListView(mangaListView);
 		mangaListView.setAdapter(swingBottomInAnimationAdapter);
-		// dialog = ProgressDialog.show(getActivity(), "Loading",
-		// "正在加载。。。。，请稍等！");
+
 		FRAG_STRING_URL = getActivity().getResources().getString(
 				R.string.recent_manga_list);
 		executorService.submit(new Runnable() {

@@ -23,10 +23,10 @@ public class ImageManager {
 		try {
 			FileInputStream fis = new FileInputStream(filePath);
 			bitmap = BitmapFactory.decodeStream(fis);
-			Log.d("imagecache", "读取"+url+"文件成功");
+			Log.d("imagecache", "璇诲彇"+url+"鏂囦欢鎴愬姛");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			Log.d("imagecache", "读取"+url+"文件失败");
+			Log.d("imagecache", "璇诲彇"+url+"鏂囦欢澶辫触");
 			bitmap = null;
 		}
 		return bitmap;
@@ -38,14 +38,14 @@ public class ImageManager {
 		String filePath = cacheDir + "/" + fileName;
 		FileOutputStream fos = new FileOutputStream(filePath);
 		bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-		Log.d("imagecache", "存入文件"+url);
+		Log.d("imagecache", "瀛樺叆鏂囦欢"+url);
 	}
 
 	public static Bitmap getBitmapFromURL(String url, String cacheDir)
 			throws Exception {
 		Bitmap bitmap = getBitmapFromFile(url, cacheDir);
 		if (bitmap == null) {
-			Log.d("imagecache", "缓存中不存在"+url);
+			Log.d("imagecache", "缂撳瓨涓笉瀛樺湪"+url);
 			byte[] data = getImage(url);
 			int length = data.length;
 			bitmap = BitmapFactory.decodeByteArray(data, 0, length);

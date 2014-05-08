@@ -84,12 +84,12 @@ public class MyFavorListAdapter extends BaseAdapter{
 		listItemView.myFavorStatus.setText(myFavorListItems.get(position).getStatusIntro());
 		String lastReadText = myFavorListItems.get(position).getLastRead();
 		if (lastReadText == null) {
-			listItemView.lastRead.setText("Î´¿´");
+			listItemView.lastRead.setText("æœªçœ‹");
 		}else {
-			listItemView.lastRead.setText("ÉÏ´Î¿´µ½£º"+myFavorListItems.get(position).getLastRead());
+			listItemView.lastRead.setText("é˜…è¯»è®°å½•ï¼š"+myFavorListItems.get(position).getLastRead());
 		}
 		
-		//listItemView.mangaIsLike.setText("Ï²»¶");
+		//listItemView.mangaIsLike.setText("å–œæ¬¢");
 		
 		return convertView;
 	}

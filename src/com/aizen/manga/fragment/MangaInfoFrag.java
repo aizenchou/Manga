@@ -214,7 +214,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 					authorView.setText(mangainfo.getAuthor());
 					System.out.println(mangainfo.getAuthor());
 					statusView.setText(mangainfo.getStatusIntro());
-					lastReadView.setText(mangainfo.getLastRead() == null?"Î´¿´":"ÉÏ´Î¿´µ½£º"+mangainfo.getLastRead());
+					lastReadView.setText(mangainfo.getLastRead() == null?"æœªçœ‹":"ä¸Šæ¬¡çœ‹åˆ°ï¼š"+mangainfo.getLastRead());
 					descView.setText(mangainfo.getDescription().length() > 60 ? mangainfo
 							.getDescription().substring(0, 60) + "..."
 							: mangainfo.getDescription());

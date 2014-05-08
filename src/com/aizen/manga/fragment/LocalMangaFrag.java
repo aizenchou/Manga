@@ -17,6 +17,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -29,6 +32,10 @@ public class LocalMangaFrag extends Fragment {
 	ArrayList<Manga> localMangas = new ArrayList<>();
 	Handler handle = new Handler();
 	ExecutorService executorService = Executors.newFixedThreadPool(10);
+	
+	private RelativeLayout statusLayout;
+	private ImageView statusImageView;
+	private TextView statusTextView;
 	
 	public static String loadLocalMangaDir = "";
 
@@ -81,6 +88,13 @@ public class LocalMangaFrag extends Fragment {
 		return rootView;
 	}
 	
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		statusLayout = (RelativeLayout) getActivity().findViewById(R.id.ReadDataStatusLayout);
+		statusImageView = (ImageView) getActivity().findViewById(R.id.StatusImage);
+		statusTextView = (TextView) getActivity().findViewById(R.id.StatusText);
+	}
+	
 	public void getLocalMangas(){
 		final ArrayList<Manga> readList = mangadbmgr.queryLocalMangas();
 		System.out.println(readList.size());
@@ -89,6 +103,7 @@ public class LocalMangaFrag extends Fragment {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				statusLayout.setVisibility(View.GONE);
 				localMangas.addAll(readList);
 				localListAdapter.notifyDataSetChanged();
 				swingBottomInAnimationAdapter.notifyDataSetChanged();
@@ -100,5 +115,11 @@ public class LocalMangaFrag extends Fragment {
 	public void onDestroy() {
 		super.onDestroy();
 		mangadbmgr.closeDB();
+	}
+	
+	public void somethingWrong() {
+		statusImageView.setImageDrawable(getResources().getDrawable(R.drawable.wrong));
+		statusTextView.setText(getResources().getString(R.string.status_text_wrong));
+		statusLayout.setVisibility(View.VISIBLE);
 	}
 }

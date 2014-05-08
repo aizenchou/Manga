@@ -74,7 +74,7 @@ public class SearchResultsFrag extends Fragment implements IXListViewListener {
 				bundle.putString(MangaInfoFrag.MANGA_LINK_STRING, getActivity()
 						.getResources().getString(R.string.domain)
 						+ results.get(position - 1).getLink());
-				it.putExtras(bundle); // it.putExtra(¡°test¡±, "shuju¡±);
+				it.putExtras(bundle); 
 				startActivity(it);
 				Toast.makeText(getActivity(),
 						results.get(position - 1).getLink(), Toast.LENGTH_SHORT)

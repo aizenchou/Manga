@@ -78,8 +78,8 @@ public class MangaListAdapter extends BaseAdapter {
 		listItemView.mangaUpdateTo.setText(mangaListItems.get(position).getUpdateto());
 		listItemView.mangaMark.setRating(Float.parseFloat(mangaListItems.get(position).getMark())/2);
 		listItemView.mangaUpdateDate.setText(mangaListItems.get(position).getUpdateDate());
-		listItemView.mangaStatus.setText(mangaListItems.get(position).isStatus()?"ÕýÔÚÁ¬ÔØ":"ÒÑÍê½á");
-		//listItemView.mangaIsLike.setText("Ï²»¶");
+		listItemView.mangaStatus.setText(mangaListItems.get(position).isStatus()?"æ­£åœ¨è¿žè½½":"å·²å®Œç»“");
+		//listItemView.mangaIsLike.setText("å–œæ¬¢");
 		
 		return convertView;
 	}

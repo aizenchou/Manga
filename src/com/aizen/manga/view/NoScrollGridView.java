@@ -30,7 +30,7 @@ public class NoScrollGridView extends GridView {
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		// TODO Auto-generated method stub
 		if (ev.getAction() == MotionEvent.ACTION_MOVE) {
-			return true;// ½ûÖ¹Gridview½øĞĞ»¬¶¯
+			return true;// ç¦æ­¢Gridviewè¿›è¡Œæ»‘åŠ¨
 		}
 		return super.dispatchTouchEvent(ev);
 	}

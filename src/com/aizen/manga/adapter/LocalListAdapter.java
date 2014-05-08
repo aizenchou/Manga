@@ -71,7 +71,7 @@ public class LocalListAdapter extends BaseAdapter {
 
 		listItemView.localAuthor.setText(localListItems.get(position).getAuthor());
 		listItemView.localName.setText(localListItems.get(position).getName());
-		listItemView.localDownloadCount.setText("“—œ¬‘ÿ"+FileLoad.getDirCount( loadDir + "/" + localListItems.get(position).getId() ) + "ª∞");
+		listItemView.localDownloadCount.setText("Â∑≤‰∏ãËΩΩ"+FileLoad.getDirCount( loadDir + "/" + localListItems.get(position).getId() ) + "ËØù");
 		
 		return convertView;
 	}

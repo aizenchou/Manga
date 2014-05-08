@@ -73,7 +73,7 @@ public class MyMangaFrag extends Fragment implements OnDismissCallback,
 				Bundle bundle = new Bundle();
 				bundle.putString(MangaInfoFrag.MANGA_LINK_STRING, myFavorMangas
 						.get(position).getLink());
-				it.putExtras(bundle); // it.putExtra(¡°test¡±, "shuju¡±);
+				it.putExtras(bundle); 
 				startActivity(it);
 				Toast.makeText(getActivity(),
 						myFavorMangas.get(position).getLink(),
