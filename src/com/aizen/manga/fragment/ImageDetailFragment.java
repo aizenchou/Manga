@@ -22,6 +22,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
+import com.aizen.manga.LocalMangaActivity;
 import com.aizen.manga.MangaActivity;
 import com.aizen.manga.R;
 import com.aizen.manga.util.ImageFetcher;
@@ -90,6 +92,11 @@ public class ImageDetailFragment extends Fragment {
         if (MangaActivity.class.isInstance(getActivity())) {
             mImageFetcher = ((MangaActivity) getActivity()).getImageFetcher();
             mImageFetcher.loadImage(mImageUrl, mImageView);
+        }else  if (LocalMangaActivity.class.isInstance(getActivity())) {
+            mImageFetcher = ((LocalMangaActivity) getActivity()).getImageFetcher();
+            mImageFetcher.loadLocalImage(mImageUrl, mImageView);
+        	System.out.println(mImageUrl);
+        	//mImageView.setImageBitmap(BitmapFactory.decodeFile(mImageUri));
         }
 
         // Pass clicks on the ImageView to the parent activity to handle

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.aizen.manga.LocalMangaActivity;
+import com.aizen.manga.LocalMangaInfoActivity;
 import com.aizen.manga.R;
 import com.aizen.manga.adapter.LocalListAdapter;
 import com.aizen.manga.module.Manga;
@@ -11,6 +13,7 @@ import com.aizen.manga.sql.MangaDBManager;
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -68,7 +71,11 @@ public class LocalMangaFrag extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				
+				Intent it = new Intent(getActivity(),LocalMangaInfoActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString(LocalMangaInfoActivity.LOCAL_MANGA_KEY, loadLocalMangaDir+"/"+localMangas.get(position).getId());
+				it.putExtras(bundle);
+				startActivity(it);
 			}
 		});
 		int layoutID = R.layout.listview_locallist;

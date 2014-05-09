@@ -84,6 +84,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.aizen.manga.MainActivity" />
         </activity>
+        <activity
+            android:name="com.aizen.manga.LocalMangaActivity"
+            android:label="@string/title_activity_local_manga"
+            android:parentActivityName="com.aizen.manga.LocalMangaInfoActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aizen.manga.LocalMangaInfoActivity" />
+        </activity>
     </application>
 
 </manifest>
