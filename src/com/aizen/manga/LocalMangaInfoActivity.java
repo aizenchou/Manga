@@ -27,14 +27,18 @@ public class LocalMangaInfoActivity extends Activity {
 	ArrayList<String> localChapters = new ArrayList<>();
 	ArrayList<HashMap<String, Object>> chaptersHashMaps = new ArrayList<>();
 	String localMangaURI = "";
+	String localMangaName = "";
 	public final static String LOCAL_MANGA_KEY = "local_manga";
+	public final static String LOCAL_MANGA_NAME_KEY = "local_manga_name";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_local_manga_info);
 		localMangaURI = getIntent().getExtras().getString(LOCAL_MANGA_KEY);
-		System.out.println(localMangaURI);
+		localMangaName = getIntent().getExtras().getString(LOCAL_MANGA_NAME_KEY);
+		System.out.println(localMangaURI+"         "+localMangaName);
+		getActionBar().setTitle(localMangaName);
 		localChapters = FileLoad.getDirFilenames(localMangaURI);
 		for (String dirName : localChapters) {
 			HashMap<String, Object> hashMap = new HashMap<>();

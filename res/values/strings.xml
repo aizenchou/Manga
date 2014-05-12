@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Manga</string>
+    <string name="app_name">Mangaful</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_detail">DetailActivity</string>
+    <string name="action_settings">设置</string>
+    <string name="title_activity_detail">漫画信息</string>
     <string name="title_activity_manga">MangaActivity</string>
-    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_button">Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_help">HelpActivity</string>
+    <string name="title_activity_help">帮助</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_search_result">搜索结果</string>
+    
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    
     <string name="manga_cover_description">漫画封面</string>
     <string name="domain">http://www.manhuadao.com</string>
     <string name="hot_manga_list">http://www.manhuadao.com/list/view</string>
     <string name="recent_manga_list">http://www.manhuadao.com/list/update</string>
     <string name="host_url">http://www.manhuadao.com</string>
     <string name="search_url">http://www.manhuadao.com/search/q_</string>
+    
     <string name="notice">“卷”为漫画单行本，“话”为杂志上的连载，“卷”包含了以往杂志上所有发行的“话”，故以下“卷”与“话”之间并没有缺少章节！</string>
     <string name="hot_tab_title">热门漫画</string>
     <string name="rec_tab_title">最近更新</string>
@@ -30,16 +33,19 @@
     <string name="search_hint">输入想搜索的漫画的名字..</string>
     <string name="load_dialog_title">正在加载..</string>
     <string name="load_dialog_content">请稍等，马上就好。</string>
+    
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>
     <string name="xlistview_header_hint_loading">正在加载..</string>
     <string name="xlistview_header_last_time">上次更新时间：</string>
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    
     <string name="clear_cache_menu">清除缓存</string>
     <string name="clear_cache_complete_toast">缓存已清除</string>
     <string name="imageview_description">图片缩略图</string>
     <string name="no_network_connection_toast">无网络连接</string>
+    
     <string name="itemdeleted">取消喜欢</string>
     <string name="taptoundo">点击返回</string>
     <string name="select_all">全选</string>

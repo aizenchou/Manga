@@ -73,6 +73,7 @@ public class LocalMangaFrag extends Fragment {
 				// TODO Auto-generated method stub
 				Intent it = new Intent(getActivity(),LocalMangaInfoActivity.class);
 				Bundle bundle = new Bundle();
+				bundle.putString(LocalMangaInfoActivity.LOCAL_MANGA_NAME_KEY, localMangas.get(position).getName());
 				bundle.putString(LocalMangaInfoActivity.LOCAL_MANGA_KEY, loadLocalMangaDir+"/"+localMangas.get(position).getId());
 				it.putExtras(bundle);
 				startActivity(it);
