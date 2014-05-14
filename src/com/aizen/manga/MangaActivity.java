@@ -56,7 +56,7 @@ public class MangaActivity extends Activity implements OnClickListener {
 	private static final boolean AUTO_HIDE = true;
 
 	/**
-	 * ´«ÈëURL
+	 * ï¿½ï¿½ï¿½ï¿½URL
 	 */
 	public static final String CHAPTER_LINK_KEY = "chapterlink";
 	
@@ -118,7 +118,7 @@ public class MangaActivity extends Activity implements OnClickListener {
 		// we shouldn't divide by 2, but this will use more memory and require a
 		// larger memory
 		// cache.
-		final int longest = (height > width ? height : width) / 2;
+		final int shortest = (height > width ? width : height) ;
 
 		ImageCache.ImageCacheParams cacheParams = new ImageCache.ImageCacheParams(
 				this, IMAGE_CACHE_DIR);
@@ -127,7 +127,7 @@ public class MangaActivity extends Activity implements OnClickListener {
 
 		// The ImageFetcher takes care of loading images into our ImageView
 		// children asynchronously
-		mImageFetcher = new ImageFetcher(this, longest);
+		mImageFetcher = new ImageFetcher(this, shortest);
 		mImageFetcher.addImageCache(getFragmentManager(), cacheParams);
 		mImageFetcher.setImageFadeIn(false);
 
