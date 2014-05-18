@@ -283,10 +283,10 @@ public class RecyclingImageView extends ImageView {
 	            matrix.setScale(scale, scale);
 
 	            // Center the image
-	            float redundantYSpace = (float) viewHeight - (scale * (float) bmHeight);
-	            float redundantXSpace = (float) viewWidth - (scale * (float) bmWidth);
-	            redundantYSpace /= (float) 2;
-	            redundantXSpace /= (float) 2;
+	            float redundantYSpace = viewHeight - (scale * bmHeight);
+	            float redundantXSpace = viewWidth - (scale * bmWidth);
+	            redundantYSpace /= 2;
+	            redundantXSpace /= 2;
 
 	            matrix.postTranslate(redundantXSpace, redundantYSpace);
 

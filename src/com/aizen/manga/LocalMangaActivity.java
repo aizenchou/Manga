@@ -7,6 +7,7 @@ import com.aizen.manga.util.FileLoad;
 import com.aizen.manga.util.ImageCache;
 import com.aizen.manga.util.ImageFetcher;
 import com.aizen.manga.util.Utils;
+import com.aizen.manga.R;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

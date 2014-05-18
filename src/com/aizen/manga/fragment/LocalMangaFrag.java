@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.aizen.manga.LocalMangaActivity;
 import com.aizen.manga.LocalMangaInfoActivity;
 import com.aizen.manga.R;
 import com.aizen.manga.adapter.LocalListAdapter;
@@ -96,6 +95,7 @@ public class LocalMangaFrag extends Fragment {
 		return rootView;
 	}
 	
+	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		statusLayout = (RelativeLayout) getActivity().findViewById(R.id.ReadDataStatusLayout);

@@ -51,7 +51,7 @@ public class XListViewHeader extends LinearLayout {
 
 	private void initView(Context context) {
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-				LayoutParams.FILL_PARENT, 0);
+				android.view.ViewGroup.LayoutParams.FILL_PARENT, 0);
 		mContainer = (LinearLayout) LayoutInflater.from(context).inflate(
 				R.layout.xlistview_header, null);
 		addView(mContainer, lp);

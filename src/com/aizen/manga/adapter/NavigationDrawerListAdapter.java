@@ -1,13 +1,10 @@
 package com.aizen.manga.adapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import com.aizen.manga.R;
 import com.aizen.manga.module.Label;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

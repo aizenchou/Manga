@@ -2,7 +2,6 @@ package com.aizen.manga.view;
 
 import com.aizen.manga.R;
 
-import android.R.bool;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;

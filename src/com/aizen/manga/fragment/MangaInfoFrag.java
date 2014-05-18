@@ -35,12 +35,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CheckBox;
-import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -121,7 +120,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 				});
 			}
 		});
-		chapterGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
+		chapterGridView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
 		chapterGridView.setMultiChoiceModeListener(this);
 		
 		int layoutID = R.layout.gridview_mangachapter;

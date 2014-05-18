@@ -13,7 +13,6 @@ import com.aizen.manga.adapter.MangaListAdapter;
 import com.aizen.manga.module.Manga;
 import com.aizen.manga.util.NetAnalyse;
 import com.nhaarman.listviewanimations.itemmanipulation.OnDismissCallback;
-import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
 import android.app.Fragment;
@@ -109,6 +108,7 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 		return rootView;
 	}
 
+	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		statusLayout = (RelativeLayout) getActivity().findViewById(R.id.ReadDataStatusLayout);

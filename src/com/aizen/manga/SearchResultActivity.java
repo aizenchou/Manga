@@ -3,7 +3,6 @@ package com.aizen.manga;
 import com.aizen.manga.fragment.SearchResultsFrag;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Intent;

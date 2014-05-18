@@ -6,7 +6,6 @@ import java.util.concurrent.Executors;
 
 import com.aizen.manga.DetailActivity;
 import com.aizen.manga.R;
-import com.aizen.manga.adapter.MangaListAdapter;
 import com.aizen.manga.adapter.MyFavorListAdapter;
 import com.aizen.manga.module.Manga;
 import com.aizen.manga.sql.MangaDBManager;

@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.aizen.manga.R;
-import com.aizen.manga.adapter.MangaListAdapter.ListItemView;
 import com.aizen.manga.module.Manga;
 import com.aizen.manga.util.ImageManager;
 

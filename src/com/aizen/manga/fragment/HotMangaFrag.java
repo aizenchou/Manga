@@ -29,7 +29,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.nhaarman.listviewanimations.itemmanipulation.OnDismissCallback;
-import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
 public class HotMangaFrag extends Fragment implements OnDismissCallback,
@@ -113,6 +112,7 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 		return rootView;
 	}
 
+	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		statusLayout = (RelativeLayout) getActivity().findViewById(R.id.ReadDataStatusLayout);

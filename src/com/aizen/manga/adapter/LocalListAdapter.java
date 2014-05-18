@@ -3,7 +3,6 @@ package com.aizen.manga.adapter;
 import java.util.ArrayList;
 
 import com.aizen.manga.R;
-import com.aizen.manga.fragment.LocalMangaFrag;
 import com.aizen.manga.module.Manga;
 import com.aizen.manga.util.FileLoad;
 

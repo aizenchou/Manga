@@ -1,7 +1,5 @@
 package com.aizen.manga;
 
-import java.io.File;
-
 import com.aizen.manga.fragment.HotMangaFrag;
 import com.aizen.manga.fragment.LocalMangaFrag;
 import com.aizen.manga.fragment.MyMangaFrag;
@@ -13,10 +11,8 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.aizen.manga.R;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -27,18 +23,15 @@ import android.graphics.drawable.TransitionDrawable;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
