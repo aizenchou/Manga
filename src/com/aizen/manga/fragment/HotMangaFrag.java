@@ -61,6 +61,7 @@ public class HotMangaFrag extends Fragment implements OnDismissCallback,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		mangas = new ArrayList<>();
+		page = 1;
 		View rootView = inflater.inflate(R.layout.fragment_manga_list,
 				container, false);
 		mangaListView = (XListView) rootView.findViewById(R.id.mangaList);

@@ -1,5 +1,7 @@
 package com.aizen.manga;
 
+import cn.sharesdk.framework.ShareSDK;
+
 import com.aizen.manga.fragment.HotMangaFrag;
 import com.aizen.manga.fragment.LocalMangaFrag;
 import com.aizen.manga.fragment.MyMangaFrag;
@@ -66,6 +68,8 @@ public class MainActivity extends Activity implements NavigationDrawerCallbacks 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//ShareSDK.initSDK(this,"1b1a638a409c");
+		ShareSDK.initSDK(this);
 		initValue();
 		initPager();
 		if (!isNetworkConnected(this)) {

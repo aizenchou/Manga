@@ -63,5 +63,7 @@
     <string name="status_text_timeout">网络没连？</string>
     <string name="title_activity_local_manga_info">LocalMangaInfoActivity</string>
     <string name="title_activity_local_manga">LocalMangaActivity</string>
+    
+    <string name="no_select_toast">请选择要下载的章节</string>
 
 </resources>
