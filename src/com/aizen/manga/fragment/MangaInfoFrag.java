@@ -49,7 +49,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
+public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener {
 
 	public static MangaInfoFrag newInstance(String url) {
 		MangaInfoFrag fragment = new MangaInfoFrag();
@@ -74,7 +74,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 	private Map<Integer, Boolean> selectMap = new HashMap<Integer, Boolean>();
 	private ProgressDialog dialog;
 	private MangaDBManager mangadbmgr;
-	
+
 	private String serviceString = Context.DOWNLOAD_SERVICE;
 	private DownloadManager downloadManager;
 
@@ -82,7 +82,8 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mangadbmgr = new MangaDBManager(getActivity());
-		downloadManager = (DownloadManager) getActivity().getSystemService(serviceString);
+		downloadManager = (DownloadManager) getActivity().getSystemService(
+				serviceString);
 	}
 
 	@Override
@@ -98,7 +99,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 		descView = (TextView) rootView.findViewById(R.id.mangainfo_desc);
 		statusView = (TextView) rootView.findViewById(R.id.mangainfo_status);
 		lastReadView = (TextView) rootView.findViewById(R.id.mangainfo_lastRead);
-		chapterGridView = (NoScrollGridView) rootView.findViewById(R.id.mangainfo_chaptergrid);		
+		chapterGridView = (NoScrollGridView) rootView.findViewById(R.id.mangainfo_chaptergrid);
 		shareBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_share_btn);
 		favorBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_favor_btn);
 		downloadBtn = (ImageButton) rootView.findViewById(R.id.mangainfo_download_btn);
@@ -114,7 +115,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 				Toast.makeText(getActivity(), chapter.getLink(),
 						Toast.LENGTH_SHORT).show();
 				executorService.submit(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
@@ -125,7 +126,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 		});
 		chapterGridView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
 		chapterGridView.setMultiChoiceModeListener(this);
-		
+
 		int layoutID = R.layout.gridview_mangachapter;
 		chaptersAdapter = new ChapterListAdapter(getActivity(), chapters,
 				layoutID);
@@ -146,7 +147,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 			}
 		});
 		shareBtn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -174,7 +175,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 			}
 		});
 		downloadBtn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -195,7 +196,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 		});
 		return rootView;
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -224,7 +225,8 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 					authorView.setText(mangainfo.getAuthor());
 					System.out.println(mangainfo.getAuthor());
 					statusView.setText(mangainfo.getStatusIntro());
-					lastReadView.setText(mangainfo.getLastRead() == null?"未看":"上次看到："+mangainfo.getLastRead());
+					lastReadView.setText(mangainfo.getLastRead() == null ? "未看"
+							: "上次看到：" + mangainfo.getLastRead());
 					descView.setText(mangainfo.getDescription().length() > 60 ? mangainfo
 							.getDescription().substring(0, 60) + "..."
 							: mangainfo.getDescription());
@@ -239,11 +241,11 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 		}
 		return mangainfo;
 	}
-	
+
 	private void setLastRead(String id, final Chapter chapter) {
 		mangadbmgr.setLastRead(id, chapter.getTitle());
 		handler.post(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
@@ -304,59 +306,64 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 	public void onItemCheckedStateChanged(ActionMode mode, int position,
 			long id, boolean checked) {
 		// TODO Auto-generated method stub
-		RelativeLayout itemLayout = (RelativeLayout) chapterGridView.getChildAt(position);
-		CheckBox checkBox = (CheckBox) itemLayout.findViewById(R.id.mangainfo_chapter_select_check);
+		RelativeLayout itemLayout = (RelativeLayout) chapterGridView
+				.getChildAt(position);
+		CheckBox checkBox = (CheckBox) itemLayout
+				.findViewById(R.id.mangainfo_chapter_select_check);
 		checkBox.setChecked(checked);
 		selectMap.put(position, checked);
-		checkBox.setVisibility(checked?View.VISIBLE:View.GONE);
+		checkBox.setVisibility(checked ? View.VISIBLE : View.GONE);
 		mode.invalidate();
 	}
-	
+
 	public void showOnekeyshare() {
-        OnekeyShare oks = new OnekeyShare();
-        
-        // 分享时Notification的图标和文字
-        oks.setNotification(R.drawable.ic_launcher, 
-        getActivity().getString(R.string.app_name));
-        // address是接收人地址，仅在信息和邮件使用
-        //oks.setAddress("12345678901");
-        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-        //oks.setTitle(getActivity().getString(R.string.share));
-        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-        //oks.setTitleUrl("http://sharesdk.cn");
-        // text是分享文本，所有平台都需要这个字段
-        oks.setText("新浪微博app授权测试");
-        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-        // imageUrl是图片的网络路径，新浪微博、人人网、QQ空间、
-        // 微信的两个平台、Linked-In支持此字段
-        //oks.setImageUrl(mangaDetail.getCoverURL());
-        // url仅在微信（包括好友和朋友圈）中使用
-        //oks.setUrl("http://sharesdk.cn");
-        // appPath是待分享应用程序的本地路劲，仅在微信中使用
-        //oks.setAppPath(MainActivity.TEST_IMAGE);
-        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        //oks.setComment(getContext().getString(R.string.share));
-        // site是分享此内容的网站名称，仅在QQ空间使用
-        //oks.setSite(context.getString(R.string.app_name));
-        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-        //oks.setSiteUrl("http://sharesdk.cn");
-        // venueName是分享社区名称，仅在Foursquare使用
-        //oks.setVenueName("Southeast in China");
-        // venueDescription是分享社区描述，仅在Foursquare使用
-        //oks.setVenueDescription("This is a beautiful place!");
-        // latitude是维度数据，仅在新浪微博、腾讯微博和Foursquare使用
-        //oks.setLatitude(23.122619f);
-        // longitude是经度数据，仅在新浪微博、腾讯微博和Foursquare使用
-        //oks.setLongitude(113.372338f);
-        // 去除注释可通过OneKeyShareCallback来捕获快捷分享的处理结果
-        // oks.setCallback(new OneKeyShareCallback());
-        //通过OneKeyShareCallback来修改不同平台分享的内容
-        //oks.setShareContentCustomizeCallback(new ShareContentCustomizeDemo());
-        oks.setSilent(true);
-        //oks.setPlatform(SinaWeibo.NAME);
-        oks.show(getActivity());
-}
-	
+		OnekeyShare oks = new OnekeyShare();
+
+		// 分享时Notification的图标和文字
+		oks.setNotification(R.drawable.ic_launcher,
+				getActivity().getString(R.string.app_name));
+		// address是接收人地址，仅在信息和邮件使用
+		// oks.setAddress("12345678901");
+		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+		// oks.setTitle(getActivity().getString(R.string.share));
+		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+		// oks.setTitleUrl("http://sharesdk.cn");
+		// text是分享文本，所有平台都需要这个字段
+		oks.setText(mangaDetail.getDescription().length() > 60 ? mangaDetail
+				.getDescription().substring(0, 60) + "..." : mangaDetail
+				.getDescription() + " " + mangaDetail.getLink());
+		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+		// imageUrl是图片的网络路径，新浪微博、人人网、QQ空间、
+		// 微信的两个平台、Linked-In支持此字段
+		// oks.setImageUrl(mangaDetail.getCoverURL());
+		// url仅在微信（包括好友和朋友圈）中使用
+		// oks.setUrl("http://sharesdk.cn");
+		// appPath是待分享应用程序的本地路劲，仅在微信中使用
+		// oks.setAppPath(MainActivity.TEST_IMAGE);
+		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
+		// oks.setComment(getContext().getString(R.string.share));
+		// site是分享此内容的网站名称，仅在QQ空间使用
+		// oks.setSite(context.getString(R.string.app_name));
+		// siteUrl是分享此内容的网站地址，仅在QQ空间使用
+		// oks.setSiteUrl("http://sharesdk.cn");
+		// venueName是分享社区名称，仅在Foursquare使用
+		// oks.setVenueName("Southeast in China");
+		// venueDescription是分享社区描述，仅在Foursquare使用
+		// oks.setVenueDescription("This is a beautiful place!");
+		// latitude是维度数据，仅在新浪微博、腾讯微博和Foursquare使用
+		// oks.setLatitude(23.122619f);
+		// longitude是经度数据，仅在新浪微博、腾讯微博和Foursquare使用
+		// oks.setLongitude(113.372338f);
+		// 去除注释可通过OneKeyShareCallback来捕获快捷分享的处理结果
+		// oks.setCallback(new OneKeyShareCallback());
+		// 通过OneKeyShareCallback来修改不同平台分享的内容
+		// oks.setShareContentCustomizeCallback(new
+		// ShareContentCustomizeDemo());
+		oks.setSilent(true);
+		// oks.setPlatform(SinaWeibo.NAME);
+		oks.show(getActivity());
+	}
+
 	private void downloadSelectChapters() {
 		if (selectMap.isEmpty()) {
 			Toast.makeText(getActivity(), getString(R.string.no_select_toast),
@@ -369,29 +376,55 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						final String chapterURL = getString(R.string.domain)+chapters.get(position).getLink();
-						final String chapterName = chapters.get(position).getTitle();
+						final String chapterURL = getString(R.string.domain)
+								+ chapters.get(position).getLink();
+						final String chapterName = chapters.get(position)
+								.getTitle();
 						System.out.println(chapterURL);
-						final ArrayList<String> pageUrls = NetAnalyse.parseHtmlToPageURLs(chapterURL);
+						final ArrayList<String> pageUrls = NetAnalyse
+								.parseHtmlToPageURLs(chapterURL);
 						final ArrayList<Long> references = new ArrayList<>();
 						handler.post(new Runnable() {
-							
+
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
 								for (String pageurl : pageUrls) {
 									System.out.println(pageurl);
-									String pagename = pageurl.substring(pageurl.lastIndexOf("/")+1);
-									DownloadManager.Request request = new Request(Uri.parse(pageurl));
-									request.addRequestHeader("Referer", url.equals("")?"http://www.imanhua.com/comic/76/list_59262.html":url);
-									request.addRequestHeader("User-Agent", "UserAgent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36");
-									request.addRequestHeader("Proxy-Connection", "Keep-Alive");
+									String pagename = pageurl.substring(pageurl
+											.lastIndexOf("/") + 1);
+									DownloadManager.Request request = new Request(
+											Uri.parse(pageurl));
+									request.addRequestHeader(
+											"Referer",
+											url.equals("") ? "http://www.imanhua.com/comic/76/list_59262.html"
+													: url);
+									request.addRequestHeader(
+											"User-Agent",
+											"UserAgent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36");
+									request.addRequestHeader(
+											"Proxy-Connection", "Keep-Alive");
 									if (Utils.hasSDCard()) {
-										request.setDestinationInExternalFilesDir(getActivity(), Environment.DIRECTORY_DOWNLOADS+"/"+mangaDetail.getId()+"/"+chapterName+"/", pagename);
+										request.setDestinationInExternalFilesDir(
+												getActivity(),
+												Environment.DIRECTORY_DOWNLOADS
+														+ "/"
+														+ mangaDetail.getId()
+														+ "/" + chapterName
+														+ "/", pagename);
 									} else {
-										request.setDestinationUri(Uri.fromFile(new File(getActivity().getFilesDir().getAbsolutePath()+"/"+mangaDetail.getId()+"/aabbbbbb.gif")));
+										request.setDestinationUri(Uri
+												.fromFile(new File(
+														getActivity()
+																.getFilesDir()
+																.getAbsolutePath()
+																+ "/"
+																+ mangaDetail
+																		.getId()
+																+ "/aabbbbbb.gif")));
 									}
-									references.add(downloadManager.enqueue(request));
+									references.add(downloadManager
+											.enqueue(request));
 								}
 							}
 						});
