@@ -86,7 +86,6 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener {
 				serviceString);
 	}
 
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
