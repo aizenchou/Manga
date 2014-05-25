@@ -58,7 +58,7 @@
         AppKey="3914620938"
         AppSecret="b5f54f1f419b91afcb208bb168383a23"
         RedirectUrl="http://mangaful.aizen.me"
-        ShareByAppClient="false"
+        ShareByAppClient="true"
         Enable="true" />
 	
 </DevInfor>
