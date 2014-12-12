@@ -45,7 +45,7 @@ public class MangaActivity extends Activity implements OnClickListener {
 	private ImagePagerAdapter mAdapter;
 	private ImageFetcher mImageFetcher;
 	private ViewPager mPager;
-	private ArrayList<String> imageurls = new ArrayList<>();
+	private ArrayList<String> imageurls = new ArrayList<String>();
 	public static String chapter = "";
 	private Handler handler = new Handler();
 	private ExecutorService executorService = Executors.newFixedThreadPool(10);

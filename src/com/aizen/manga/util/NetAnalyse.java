@@ -51,7 +51,7 @@ public class NetAnalyse {
 
 	public static ArrayList<Manga> parseHtmlToResults(String URL,
 			String imageCacheDir) throws Exception {
-		ArrayList<Manga> results = new ArrayList<>();
+		ArrayList<Manga> results = new ArrayList<Manga>();
 		Document doc = Jsoup.connect(URL).timeout(6000).get();
 		Elements liElements = doc.select("li.cf");
 		for (Element li : liElements) {
@@ -92,7 +92,7 @@ public class NetAnalyse {
 
 	public static ArrayList<Manga> parseHtmlToList(String URL,
 			String imageCacheDir) throws Exception {
-		ArrayList<Manga> mangas = new ArrayList<>();
+		ArrayList<Manga> mangas = new ArrayList<Manga>();
 		Document doc = Jsoup.connect(URL).timeout(6000).get();
 		Elements listElements = doc.select("ul#contList > li");
 		for (Element li : listElements) {
@@ -160,14 +160,14 @@ public class NetAnalyse {
 			throws IOException {
 		Document doc = Jsoup.connect(URL).timeout(6000).get();
 		Elements eles = doc.select("div.chapter-list");
-		ArrayList<Chapter> chapters = new ArrayList<>();
+		ArrayList<Chapter> chapters = new ArrayList<Chapter>();
 		for (Element ele : eles) {
 			Document subListDoc = Jsoup.parse(ele.html());
-			ArrayList<Chapter> subChapters = new ArrayList<>();
+			ArrayList<Chapter> subChapters = new ArrayList<Chapter>();
 			Elements uls = subListDoc.select("ul");
 			for (Element ul : uls) {
 				Elements links = Jsoup.parse(ul.html()).select("a.status0");
-				ArrayList<Chapter> ulsChapters = new ArrayList<>();
+				ArrayList<Chapter> ulsChapters = new ArrayList<Chapter>();
 				for (Element link : links) {
 					Chapter chapter = new Chapter(link.text().substring(
 							0,
@@ -204,7 +204,7 @@ public class NetAnalyse {
 
 	public static ArrayList<String> getMatchStrings(String regex,
 			String dataresult, int groupnum, String prefix, String postfix) {
-		ArrayList<String> matchStrings = new ArrayList<>();
+		ArrayList<String> matchStrings = new ArrayList<String>();
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(dataresult);
 		while (matcher.find())

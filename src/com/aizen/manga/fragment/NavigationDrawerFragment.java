@@ -38,7 +38,7 @@ public class NavigationDrawerFragment extends Fragment {
 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerListView;
-	private ArrayList<Label> labelDatas = new ArrayList<>();
+	private ArrayList<Label> labelDatas = new ArrayList<Label>();
 	private NavigationDrawerListAdapter mNavigationDrawerListAdapter;
 	private View mFragmentContainerView;
 

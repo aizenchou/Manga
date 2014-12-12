@@ -59,7 +59,7 @@ public class RecentMangaFrag extends Fragment implements OnDismissCallback,
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
-		mangas = new ArrayList<>();
+		mangas = new ArrayList<Manga>();
 		page = 1;
 		View rootView = inflater.inflate(R.layout.fragment_manga_list,
 				container, false);

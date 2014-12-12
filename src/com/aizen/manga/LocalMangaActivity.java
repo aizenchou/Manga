@@ -35,7 +35,7 @@ public class LocalMangaActivity extends Activity implements OnClickListener{
 	private ImagePagerAdapter mAdapter;
 	private ImageFetcher mImageFetcher;
 	private ViewPager mPager;
-	private ArrayList<String> imageuris = new ArrayList<>();
+	private ArrayList<String> imageuris = new ArrayList<String>();
 	public static String chapteruri = "";
 
 

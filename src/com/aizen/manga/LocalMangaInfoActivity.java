@@ -17,8 +17,8 @@ import android.widget.SimpleAdapter;
 public class LocalMangaInfoActivity extends Activity {
 
 	GridView localChapterGridView;
-	ArrayList<String> localChapters = new ArrayList<>();
-	ArrayList<HashMap<String, Object>> chaptersHashMaps = new ArrayList<>();
+	ArrayList<String> localChapters = new ArrayList<String>();
+	ArrayList<HashMap<String, Object>> chaptersHashMaps = new ArrayList<HashMap<String, Object>>();
 	String localMangaURI = "";
 	String localMangaName = "";
 	public final static String LOCAL_MANGA_KEY = "local_manga";
@@ -34,7 +34,7 @@ public class LocalMangaInfoActivity extends Activity {
 		getActionBar().setTitle(localMangaName);
 		localChapters = FileLoad.getDirFilenames(localMangaURI);
 		for (String dirName : localChapters) {
-			HashMap<String, Object> hashMap = new HashMap<>();
+			HashMap<String, Object> hashMap = new HashMap<String, Object>();
 			hashMap.put("chaptername", dirName);
 			chaptersHashMaps.add(hashMap);
 		}

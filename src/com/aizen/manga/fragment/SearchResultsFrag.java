@@ -39,7 +39,7 @@ public class SearchResultsFrag extends Fragment implements IXListViewListener {
 
 	private SearchResultListAdapter resultAdapter;
 	private SwingBottomInAnimationAdapter swingBottomInAnimationAdapter;
-	private ArrayList<Manga> results = new ArrayList<>();
+	private ArrayList<Manga> results = new ArrayList<Manga>();
 	private XListView resultListView;
 	private Handler handler = new Handler();
 	private ExecutorService executorService = Executors.newFixedThreadPool(10);

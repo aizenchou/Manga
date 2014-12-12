@@ -57,7 +57,7 @@ public class MyMangaFrag extends Fragment implements OnDismissCallback,
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
-		myFavorMangas = new ArrayList<>();
+		myFavorMangas = new ArrayList<Manga>();
 		View rootView = inflater.inflate(R.layout.fragment_myfavor_list,
 				container, false);
 		myFavorListView = (ListView) rootView.findViewById(R.id.mangaList);

@@ -15,7 +15,7 @@ public class FileLoad {
 	}
 
 	public static ArrayList<String> getDirFilenames(String dirPath) {
-		ArrayList<String> filenameArrayList = new ArrayList<>();
+		ArrayList<String> filenameArrayList = new ArrayList<String>();
 		String[] filenames = new File(dirPath).list();
 		for (String string : filenames) {
 			filenameArrayList.add(string);
@@ -25,7 +25,7 @@ public class FileLoad {
 	}
 	
 	public static ArrayList<String> getDirFileURIs(String dirPath) {
-		ArrayList<String> filenameArrayList = new ArrayList<>();
+		ArrayList<String> filenameArrayList = new ArrayList<String>();
 		String[] filenames = new File(dirPath).list();
 		for (String string : filenames) {
 			filenameArrayList.add(dirPath+"/"+string);

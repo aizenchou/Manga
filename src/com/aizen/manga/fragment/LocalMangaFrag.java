@@ -31,7 +31,7 @@ public class LocalMangaFrag extends Fragment {
 	SwingBottomInAnimationAdapter swingBottomInAnimationAdapter;
 	ListView localListView;
 	MangaDBManager mangadbmgr;
-	ArrayList<Manga> localMangas = new ArrayList<>();
+	ArrayList<Manga> localMangas = new ArrayList<Manga>();
 	Handler handle = new Handler();
 	ExecutorService executorService = Executors.newFixedThreadPool(10);
 	
@@ -60,7 +60,7 @@ public class LocalMangaFrag extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
-		localMangas = new ArrayList<>();
+		localMangas = new ArrayList<Manga>();
 		View rootView = inflater.inflate(R.layout.fragment_local_list,
 				container, false);
 		localListView = (ListView) rootView.findViewById(R.id.localList);

@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class NavigationDrawerListAdapter extends BaseAdapter {
 
 	private Context context;
-	private ArrayList<Label> Labels = new ArrayList<>();
+	private ArrayList<Label> Labels = new ArrayList<Label>();
 	private LayoutInflater listContainer;
 	private int resource;
 	private ListItemView listItemView;

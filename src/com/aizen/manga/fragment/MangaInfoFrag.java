@@ -69,7 +69,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener {
 	private ImageButton shareBtn, favorBtn, downloadBtn;
 	// private ImageButton refreshBtn;
 	NoScrollGridView chapterGridView;
-	ArrayList<Chapter> chapters = new ArrayList<>();
+	ArrayList<Chapter> chapters = new ArrayList<Chapter>();
 	ChapterListAdapter chaptersAdapter;
 	private Map<Integer, Boolean> selectMap = new HashMap<Integer, Boolean>();
 	private ProgressDialog dialog;
@@ -383,7 +383,7 @@ public class MangaInfoFrag extends Fragment implements MultiChoiceModeListener {
 						System.out.println(chapterURL);
 						final ArrayList<String> pageUrls = NetAnalyse
 								.parseHtmlToPageURLs(chapterURL);
-						final ArrayList<Long> references = new ArrayList<>();
+						final ArrayList<Long> references = new ArrayList<Long>();
 						handler.post(new Runnable() {
 
 							@Override
